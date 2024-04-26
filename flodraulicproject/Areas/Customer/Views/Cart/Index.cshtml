@@ -18,7 +18,7 @@
             </div>
             <div class="row mb-3 pb-3">
                 <div class="col-md-2 offset-md-1">
-                    <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary text-uppercase mb-5 btn-sm"><small>Continue Shopping</small></a>
+                    <a asp-area="Customer" asp-controller="Home" asp-action="Categories" class="btn btn-outline-primary text-uppercase mb-5 btn-sm"><small>Continue Shopping</small></a>
                 </div>
                 <div class="col-md-10 offset-md-1">
 
@@ -29,7 +29,7 @@
                                 <img src="@item.Product.ImageUrl" class="rounded" width="100%" />
                             </div>
                             <div class="col-12 col-lg-6 pt-md-3">
-                                <h5 class="text-uppercase text-secondary"><strong>@item.Product.Title</strong></h5>
+                                <h5 class="text-uppercase text-secondary"><strong>@item.Product.PartNumber</strong></h5>
                                 <p><small>@Html.Raw(item.Product.Description)</small></p>
                             </div>
                             <div class="col-12  col-lg-5 text-center row">

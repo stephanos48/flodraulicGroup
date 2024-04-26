@@ -16,6 +16,9 @@ namespace flodraulicproject.DataAccess.Repository.IRepository
         IApplicationUserRepository ApplicationUser { get; }
         IOrderDetailRepository OrderDetail { get; }
         IOrderHeaderRepository OrderHeader { get; }
+        IPartFamilyRepository PartFamily { get; }
+        IInventoryRepository Inventory { get; }
+        ICustomerLocationRepository CustomerLocation { get; }
 
         void Save();
 

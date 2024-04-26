@@ -1,0 +1,80 @@
+﻿<div class="container mt-4">
+    <div style="text-align: center">
+        <div class="row">
+            <br />
+            <div class="col-11 text-left">
+                <img src="/Images/flodraulic.jpg" alt="image">
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row" style="text-align: center">
+            <div class="col-md-4">
+                <h3><i class="fa fa-modx"></i></h3>
+                <a asp-controller="Home" asp-action="PumpsList" class="btn btn-primary">
+                    <img src="/Images/pump.png" alt="image" width="50" height="50">
+                    <i class="bi bi-pump"></i> Pumps
+                </a>
+            </div>
+            <div class="col-md-4">
+                <h3><i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
+                <a asp-controller="Home" asp-action="Valves" class="btn btn-primary">
+                    <img src="/Images/valve.png" alt="image" width="50" height="50">
+                    <i class="bi bi-valve"></i> Valves
+                </a>
+            </div>
+        </div>
+        <br>
+        <br>
+
+    </div>
+
+</div>
+
+
+@*@model IEnumerable<Product>
+
+<div class="row pb-3">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-sm-6">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                        <img src="@product.ImageUrl" class="card-img-top rounded" />
+                        <div class="card-body pb-0">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@product.Title</p>
+                                <p class="card-title text-warning text-center">by <b>@product.Author</b></p>
+                            </div>
+                            <div class="pl-1">
+                                <p class="text-dark text-opacity-75 text-center mb-0">
+                                    List Price: 
+                                    <span class="text-decoration-line-through">
+                                        @product.ListPrice.ToString("c")
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="pl-1">
+                                <p class="text-dark text-opacity-75 text-center">As low as: 
+                                    <span>
+                                        @product.Price100.ToString("c")
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <a asp-action="Details" 
+                            asp-route-productId="@product.Id"
+                            class="btn btn-primary bg-gradient border-0 form-control">
+                                Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+*@

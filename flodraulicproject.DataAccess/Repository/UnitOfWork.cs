@@ -19,6 +19,10 @@ namespace flodraulicproject.DataAccess.Repository
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public IOrderHeaderRepository OrderHeader { get; private set; }
         public IOrderDetailRepository OrderDetail { get; private set; }
+        public IPartFamilyRepository PartFamily { get; private set; }
+        public IInventoryRepository Inventory { get; private set; }
+        public ICustomerLocationRepository CustomerLocation { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -29,6 +33,9 @@ namespace flodraulicproject.DataAccess.Repository
             Company = new CompanyRepository(_db);
             OrderHeader = new OrderHeaderRepository(_db);
             OrderDetail = new OrderDetailRepository(_db);
+            PartFamily = new PartFamilyRepository(_db);
+            Inventory = new InventoryRepository(_db);
+            CustomerLocation = new CustomerLocationRepository(_db);
     }
         public void Save()
         {

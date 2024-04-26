@@ -187,27 +187,27 @@ namespace flodraulicproject.Areas.Admin.Controllers
 
         #region API CALLS
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            List<Company> objCompanyList = _unitOfWork.Company.GetAll().ToList();
-            return Json(new { data = objCompanyList });
-        }
-
-        //[HttpDelete]
-        public IActionResult Delete(int? id)
-        {
-            var companyToBeDeleted = _unitOfWork.Company.Get(u => u.Id == id);
-            if (companyToBeDeleted == null)
+            [HttpGet]
+            public IActionResult GetAll()
             {
-                return Json(new { success = false, message = "Error while deleting" });
+                List<Company> objCompanyList = _unitOfWork.Company.GetAll().ToList();
+                return Json(new { data = objCompanyList });
             }
 
-            _unitOfWork.Company.Remove(companyToBeDeleted);
-            _unitOfWork.Save();
+            //[HttpDelete]
+            public IActionResult Delete(int? id)
+            {
+                var companyToBeDeleted = _unitOfWork.Company.Get(u => u.Id == id);
+                if (companyToBeDeleted == null)
+                {
+                    return Json(new { success = false, message = "Error while deleting" });
+                }
 
-            return Json(new { success = true, message = "Delete Successful" });
-        }
+                _unitOfWork.Company.Remove(companyToBeDeleted);
+                _unitOfWork.Save();
+
+                return Json(new { success = true, message = "Delete Successful" });
+            }
 
         #endregion
     }

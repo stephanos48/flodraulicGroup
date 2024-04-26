@@ -26,7 +26,7 @@ namespace flodraulicproject.Areas.Admin.Controllers
         public IActionResult Index()
         {
             //var objCategoryList = _db.Categories.ToList();
-            var objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
+            var objProductList = _unitOfWork.Product.GetAll(includeProperties:"PartFamily").ToList();
 
             return View(objProductList);
         }
@@ -40,11 +40,20 @@ namespace flodraulicproject.Areas.Admin.Controllers
                     Value = u.Id.ToString()
                 });
 
+            IEnumerable<SelectListItem> PartFamilyList = _unitOfWork.PartFamily
+                .GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.FamilyName,
+                    Value = u.Id.ToString()
+                });
+
             ViewBag.CategoryList = CategoryList;
+            ViewBag.PartFamilyList = PartFamilyList;
             //ViewData["CategoryList"] = CategoryList;
             ProductVM productVM = new ProductVM()
             {
                 CategoryList = CategoryList,
+                PartFamilyList = PartFamilyList,
                 Product = new Product()
             };
             return View(productVM);
@@ -59,11 +68,20 @@ namespace flodraulicproject.Areas.Admin.Controllers
                     Value = u.Id.ToString()
                 });
 
+            IEnumerable<SelectListItem> PartFamilyList = _unitOfWork.PartFamily
+                .GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.FamilyName,
+                    Value = u.Id.ToString()
+                });
+
             ViewBag.CategoryList = CategoryList;
+            ViewBag.PartFamilyList = PartFamilyList;
             //ViewData["CategoryList"] = CategoryList;
             ProductVM productVM = new ProductVM()
             {
                 CategoryList = CategoryList,
+                PartFamilyList = PartFamilyList,
                 Product = new Product()
             };
             if (id == null || id == 0)
@@ -83,6 +101,7 @@ namespace flodraulicproject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Upsert(ProductVM productVM, IFormFile? file)
         {
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
@@ -134,6 +153,13 @@ namespace flodraulicproject.Areas.Admin.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 });
+
+                productVM.PartFamilyList = _unitOfWork.PartFamily.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.FamilyName,
+                    Value = u.Id.ToString()
+                });
+
                 return View(productVM);
             }
         }
@@ -158,6 +184,13 @@ namespace flodraulicproject.Areas.Admin.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 });
+
+                productVM.PartFamilyList = _unitOfWork.PartFamily.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.FamilyName,
+                    Value = u.Id.ToString()
+                });
+
                 return View(productVM);
             }
         }
@@ -231,36 +264,36 @@ namespace flodraulicproject.Areas.Admin.Controllers
 
         #region API CALLS
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
-            return Json(new { data = objProductList });
-        }
-
-        //[HttpDelete]
-        public IActionResult Delete(int? id)
-        {
-            var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
-            if (productToBeDeleted == null)
+            [HttpGet]
+            public IActionResult GetAll()
             {
-                return Json(new { success = false, message = "Error while deleting" });
+                List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "PartFamily").ToList();
+                return Json(new { data = objProductList });
             }
 
-            var oldImagePath =
-                            Path.Combine(_webHostEnvironment.WebRootPath,
-                            productToBeDeleted.ImageUrl.TrimStart('\\'));
-
-            if (System.IO.File.Exists(oldImagePath))
+            //[HttpDelete]
+            public IActionResult Delete(int? id)
             {
-                System.IO.File.Delete(oldImagePath);
+                var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
+                if (productToBeDeleted == null)
+                {
+                    return Json(new { success = false, message = "Error while deleting" });
+                }
+
+                var oldImagePath =
+                                Path.Combine(_webHostEnvironment.WebRootPath,
+                                productToBeDeleted.ImageUrl.TrimStart('\\'));
+
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+
+                _unitOfWork.Product.Remove(productToBeDeleted);
+                _unitOfWork.Save();
+
+                return Json(new { success = true, message = "Delete Successful" });
             }
-
-            _unitOfWork.Product.Remove(productToBeDeleted);
-            _unitOfWork.Save();
-
-            return Json(new { success = true, message = "Delete Successful" });
-        }
 
         #endregion
     }

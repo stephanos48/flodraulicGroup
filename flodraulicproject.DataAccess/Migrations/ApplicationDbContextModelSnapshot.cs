@@ -254,19 +254,19 @@ namespace flodraulicproject.DataAccess.Migrations
                         {
                             Id = 1,
                             DisplayOrder = 1,
-                            Name = "Action"
+                            Name = "Pumps"
                         },
                         new
                         {
                             Id = 2,
                             DisplayOrder = 2,
-                            Name = "SciFi"
+                            Name = "Valves"
                         },
                         new
                         {
                             Id = 3,
                             DisplayOrder = 3,
-                            Name = "History"
+                            Name = "Filters"
                         });
                 });
 
@@ -306,7 +306,7 @@ namespace flodraulicproject.DataAccess.Migrations
                         {
                             Id = 1,
                             City = "Tech City",
-                            Name = "Tech Solution",
+                            Name = "Matheson",
                             PhoneNumber = "6695446789",
                             PostalCode = "12121",
                             State = "IL",
@@ -326,11 +326,127 @@ namespace flodraulicproject.DataAccess.Migrations
                         {
                             Id = 3,
                             City = "Memphis",
-                            Name = "United Niggas",
+                            Name = "United Fellows",
                             PhoneNumber = "6695446789",
                             PostalCode = "66121",
                             State = "TN",
                             StreetAddress = "124 Africa Dr"
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.CustomerLocation", b =>
+                {
+                    b.Property<int>("CustomerLocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerLocationId"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CustomerLocationId");
+
+                    b.ToTable("CustomerLocations");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerLocationId = 1,
+                            Address = "",
+                            City = "",
+                            Country = "",
+                            LocationName = "ATL",
+                            Notes = "",
+                            State = "",
+                            ZipCode = ""
+                        },
+                        new
+                        {
+                            CustomerLocationId = 2,
+                            Address = "",
+                            City = "",
+                            Country = "",
+                            LocationName = "DFW",
+                            Notes = "",
+                            State = "",
+                            ZipCode = ""
+                        },
+                        new
+                        {
+                            CustomerLocationId = 3,
+                            Address = "",
+                            City = "",
+                            Country = "",
+                            LocationName = "HOU",
+                            Notes = "",
+                            State = "",
+                            ZipCode = ""
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.Inventory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("PartNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StartQoh")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Inventories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PartNumber = "2000-3900",
+                            StartQoh = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PartNumber = "219-2370",
+                            StartQoh = 10
+                        },
+                        new
+                        {
+                            Id = 3,
+                            PartNumber = "031-6450",
+                            StartQoh = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            PartNumber = "222-6780",
+                            StartQoh = 4
                         });
                 });
 
@@ -439,6 +555,41 @@ namespace flodraulicproject.DataAccess.Migrations
                     b.ToTable("OrderHeaders");
                 });
 
+            modelBuilder.Entity("flodraulicproject.Models.PartFamily", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FamilyName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PartFamilies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DisplayOrder = 1,
+                            FamilyName = "Tractor"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DisplayOrder = 2,
+                            FamilyName = "Trailer"
+                        });
+                });
+
             modelBuilder.Entity("flodraulicproject.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -447,18 +598,10 @@ namespace flodraulicproject.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ISBN")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -469,22 +612,21 @@ namespace flodraulicproject.DataAccess.Migrations
                     b.Property<double>("ListPrice")
                         .HasColumnType("float");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<int>("PartFamilyId")
+                        .HasColumnType("int");
 
-                    b.Property<double>("Price100")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Price50")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Title")
+                    b.Property<string>("PartNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Qoh")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("PartFamilyId");
 
                     b.ToTable("Products");
 
@@ -492,86 +634,46 @@ namespace flodraulicproject.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Author = "Billy Spark",
                             CategoryId = 1,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                            ISBN = "SWD9999001",
+                            Description = "Pump",
                             ImageUrl = "",
                             ListPrice = 99.0,
-                            Price = 90.0,
-                            Price100 = 80.0,
-                            Price50 = 85.0,
-                            Title = "Fortune of Time"
+                            PartFamilyId = 1,
+                            PartNumber = "2000-3900",
+                            Qoh = 5
                         },
                         new
                         {
                             Id = 2,
-                            Author = "Nancy Hoover",
-                            CategoryId = 3,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                            ISBN = "CAW777777701",
+                            CategoryId = 1,
+                            Description = "Pump",
                             ImageUrl = "",
                             ListPrice = 40.0,
-                            Price = 30.0,
-                            Price100 = 20.0,
-                            Price50 = 25.0,
-                            Title = "Dark Skies"
+                            PartFamilyId = 1,
+                            PartNumber = "219-2370",
+                            Qoh = 10
                         },
                         new
                         {
                             Id = 3,
-                            Author = "Julian Button",
-                            CategoryId = 1,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                            ISBN = "RITO5555501",
+                            CategoryId = 2,
+                            Description = "Valve",
                             ImageUrl = "",
                             ListPrice = 55.0,
-                            Price = 50.0,
-                            Price100 = 35.0,
-                            Price50 = 40.0,
-                            Title = "Vanish in the Sunset"
+                            PartFamilyId = 2,
+                            PartNumber = "031-6450",
+                            Qoh = 15
                         },
                         new
                         {
                             Id = 4,
-                            Author = "Abby Muscles",
-                            CategoryId = 2,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                            ISBN = "WS3333333301",
+                            CategoryId = 3,
+                            Description = "Filter",
                             ImageUrl = "",
                             ListPrice = 70.0,
-                            Price = 65.0,
-                            Price100 = 55.0,
-                            Price50 = 60.0,
-                            Title = "Cotton Candy"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Author = "Ron Parker",
-                            CategoryId = 1,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                            ISBN = "SOTJ1111111101",
-                            ImageUrl = "",
-                            ListPrice = 30.0,
-                            Price = 27.0,
-                            Price100 = 20.0,
-                            Price50 = 25.0,
-                            Title = "Rock in the Ocean"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Author = "Laura Phantom",
-                            CategoryId = 3,
-                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
-                            ISBN = "FOT000000001",
-                            ImageUrl = "",
-                            ListPrice = 25.0,
-                            Price = 23.0,
-                            Price100 = 20.0,
-                            Price50 = 22.0,
-                            Title = "Leaves and Wonders"
+                            PartFamilyId = 1,
+                            PartNumber = "222-6780",
+                            Qoh = 3
                         });
                 });
 
@@ -612,6 +714,9 @@ namespace flodraulicproject.DataAccess.Migrations
                     b.Property<int?>("CompanyId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CustomerLocationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -626,6 +731,8 @@ namespace flodraulicproject.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("CustomerLocationId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -719,7 +826,15 @@ namespace flodraulicproject.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("flodraulicproject.Models.PartFamily", "PartFamily")
+                        .WithMany()
+                        .HasForeignKey("PartFamilyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("PartFamily");
                 });
 
             modelBuilder.Entity("flodraulicproject.Models.ShoppingCart", b =>
@@ -747,7 +862,13 @@ namespace flodraulicproject.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("CompanyId");
 
+                    b.HasOne("flodraulicproject.Models.CustomerLocation", "CustomerLocation")
+                        .WithMany()
+                        .HasForeignKey("CustomerLocationId");
+
                     b.Navigation("Company");
+
+                    b.Navigation("CustomerLocation");
                 });
 #pragma warning restore 612, 618
         }

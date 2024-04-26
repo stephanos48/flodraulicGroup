@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,11 @@ namespace flodraulicproject.Utility
 		public const string PaymentStatusApproved = "Approved";
 		public const string PaymentStatusDelayedPayment = "ApprovedFor DelayedPayment";
 		public const string PaymentStatusRejected = "Rejected";
+
+		public const string SessionCart = "SessionShoppingCart";
+
+		public const string Tractor = "Tractor";
+		public const string Trailer = "Trailer";
 
 	}
 }

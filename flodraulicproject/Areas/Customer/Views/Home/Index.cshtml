@@ -1,143 +1,59 @@
-﻿<div class="container mt-4">
-    <div style="text-align: center">
-        <div class="row">
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page - Flodraulic Portal</title>
+
+    <link href="/Content/css?v=adtfa28cCxe9bNCEjEz7zi5EAtXK-o_GVzznmU-iBdI1" rel="stylesheet" />
+
+    <script src="/bundles/modernizr?v=inCVuEFe6J4Q07A0AcRsbJic_UE5MwpRMNGcOtk94TE1"></script>
+
+    <script src="/bundles/lib?v=fmsNBgU0FaORPxTSSlKQ0vO5xdKHIXQ656J6e9x17Rs1"></script>
+
+</head>
+<body ng-app="MyApp">
+    <div class="jumbotron">
+        <div style="text-align: center">
+            <div class="row">
+                <br />
+                <div class="col-11 text-left">
+                    @*<img src="/Images/flodraulic.jpg" alt="image">*@
+                </div>
+            </div>
             <br />
-            <div class="col-11 text-left">
-                <img src="/Images/flodraulic.jpg" alt="image">
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <div class="row">
-            <div class="col-md-3">
-                <h3><i class="fa fa-modx"></i></h3>
-                <a asp-controller="Home" asp-action="Products" class="btn btn-primary">
-                    <i class="bi bi-cpu"></i> Inventory
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
-                <a asp-controller="Home" asp-action="SupplyChain" class="btn">
-                    <i class="bi bi-globe"></i> Supply Chain
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-eye"></i></h3>
-                <a asp-controller="Home" asp-action="Quality" class="btn ">
-                    <i class="bi bi-clipboard-check-fill"></i> Quality
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-magnet"></i></h3>
-                <a asp-controller="Home" asp-action="Engineering" class="btn ">
-                    <i class="bi bi-pencil"></i> Engineering
-                </a>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="row">
-            <div class="col-md-3">
-                <h3><i class="fa fa-users"></i></h3>
-                <a asp-controller="Home" asp-action="Sales" class="btn ">
-                    <i class="bi bi-people"></i> Sales
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-code"></i></h3>
-                <a asp-controller="Home" asp-action="IT" class="btn ">
-                    <i class="bi bi-activity"></i> IT
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-blind"></i></h3>
-                <a asp-controller="Home" asp-action="Finance" class="btn ">
-                    <i class="bi bi-currency-bitcoin"></i> Finance
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-android"></i></h3>
-                <a asp-controller="Home" asp-action="AI" class="btn ">
-                    <i class="bi bi-crosshair"></i> AI
-                </a>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="row">
-            <div class="col-md-3">
-                <h3><i class="fa fa-id-card"></i></h3>
-                <a asp-controller="Home" asp-action="HR" class="btn ">
-                    <i class="bi bi-person-plus-fill"></i> HR
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-wrench"></i></h3>
-                <a asp-controller="Home" asp-action="Maintenance" class="btn ">
-                    <i class="bi bi-gear"></i> Maintenance
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-medkit"></i></h3>
-                <a asp-controller="Home" asp-action="Safety" class="btn ">
-                    <i class="bi bi-cone"></i> Safety
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-archive"></i></h3>
-                <a asp-controller="Home" asp-action="Archive" class="btn ">
-                    <i class="bi bi-archive"></i> Archive
-                </a>
+            <img src="/images/car4.png" class="img-responsive center-block" />
+            <br />
+            <p class="lead">Connecting our plants to our customers the world over.</p>
+            <p>
+                <a href="https://flodraulic.com" class="btn btn-primary btn-lg">Homepage &raquo;</a>
+            </p>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Customer First Mindset</h3>
+                    <p>We strive daily to service our customers better.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Data Driven Decisions</h3>
+                    <p>Good information leads to good decisions. The decisions we make are always data driven.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Global Communication</h3>
+                    <p>This site allows our companies to communicate, real-time, worldwide.</p>
+                </div>
             </div>
         </div>
     </div>
 
-</div>
+    <footer>
+        <p></p>
+    </footer>
 
 
-@*@model IEnumerable<Product>
+    <script src="/bundles/jquery-3.3.1.js"></script>
 
-<div class="row pb-3">
-    @foreach (var product in Model)
-    {
-        <div class="col-lg-3 col-sm-6">
-            <div class="row p-2">
-                <div class="col-12 p-1">
-                    <div class="card border-0 p-3 shadow border-top border-5 rounded">
-                        <img src="@product.ImageUrl" class="card-img-top rounded" />
-                        <div class="card-body pb-0">
-                            <div class="pl-1">
-                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@product.Title</p>
-                                <p class="card-title text-warning text-center">by <b>@product.Author</b></p>
-                            </div>
-                            <div class="pl-1">
-                                <p class="text-dark text-opacity-75 text-center mb-0">
-                                    List Price: 
-                                    <span class="text-decoration-line-through">
-                                        @product.ListPrice.ToString("c")
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="pl-1">
-                                <p class="text-dark text-opacity-75 text-center">As low as: 
-                                    <span>
-                                        @product.Price100.ToString("c")
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                        <div>
-                            <a asp-action="Details" 
-                            asp-route-productId="@product.Id"
-                            class="btn btn-primary bg-gradient border-0 form-control">
-                                Details
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-</div>
-*@
+    <script src="/bundles/jqueryval?v=x63JhYAtPoWfuvvzOG4ie0IbeC8KtI5Q_Ln6iJWChUE1"></script>
+</body>
+</html>

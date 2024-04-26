@@ -3,6 +3,7 @@ using flodraulicproject.Models;
 using flodraulicproject.Models.ViewModels;
 using flodraulicproject.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
 using Stripe.BillingPortal;
@@ -20,11 +21,13 @@ namespace flodraulicproject.Areas.Customer.Controllers
     {
 
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailSender _emailSender;
         [BindProperty]
         public ShoppingCartVM ShoppingCartVM { get; set; }
-        public CartController(IUnitOfWork unitOfWork)
+        public CartController(IUnitOfWork unitOfWork, IEmailSender emailSender)
         {
             _unitOfWork = unitOfWork;
+            _emailSender = emailSender;
         }
 
         public IActionResult Index()
@@ -139,7 +142,8 @@ namespace flodraulicproject.Areas.Customer.Controllers
 			{
 				//it is a regular customer account and we need to capture payment
 				//stripe logic
-				var domain = "http://localhost:5118/";
+				//var domain = "http://localhost:5118/";
+                var domain = Request.Scheme + "://" + Request.Host.Value + "/";
 				var options = new SessionCreateOptions
 				{
 					SuccessUrl = domain + $"/customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
@@ -158,7 +162,7 @@ namespace flodraulicproject.Areas.Customer.Controllers
                             Currency = "usd",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
-                                Name = item.Product.Title
+                                Name = item.Product.PartNumber
                             }
                         },
                         Quantity = item.Count
@@ -192,7 +196,11 @@ namespace flodraulicproject.Areas.Customer.Controllers
                     _unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
                     _unitOfWork.Save();
                 }
+                HttpContext.Session.Clear();
             }
+
+            _emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "New Order - Flodraulic",
+                $"<p>New Order Created - {orderHeader.Id}</p>");
 
             List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
                 .GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();
@@ -214,10 +222,12 @@ namespace flodraulicproject.Areas.Customer.Controllers
 
         public IActionResult Minus(int cartId)
         {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId, tracked:true);
             if (cartFromDb.Count <= 1)
             {
                 //remove that from cart
+                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart
+                    .GetAll(u => u.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
                 _unitOfWork.ShoppingCart.Remove(cartFromDb);
             }
             else
@@ -231,11 +241,13 @@ namespace flodraulicproject.Areas.Customer.Controllers
         }
         public IActionResult Remove(int cartId)
         {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId,tracked:true);
             //remove that from cart
+            HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart
+                .GetAll(u => u.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
             _unitOfWork.ShoppingCart.Remove(cartFromDb);
-
             _unitOfWork.Save();
+            
             return RedirectToAction(nameof(Index));
         }
 
@@ -243,17 +255,17 @@ namespace flodraulicproject.Areas.Customer.Controllers
         {
             if (shoppingCart.Count <= 50)
             {
-                return shoppingCart.Product.Price;
+                return shoppingCart.Product.ListPrice;
             }
             else
             {
                 if (shoppingCart.Count <= 100)
                 {
-                    return shoppingCart.Product.Price50;
+                    return shoppingCart.Product.ListPrice;
                 }
                 else
                 {
-                    return shoppingCart.Product.Price100;
+                    return shoppingCart.Product.ListPrice;
                 }
             }
         }

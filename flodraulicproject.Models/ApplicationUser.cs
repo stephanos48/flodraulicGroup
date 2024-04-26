@@ -22,7 +22,13 @@ namespace flodraulicproject.Models
         public int? CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         [ValidateNever]
-        public Company Company { get; set; }
+        public Company? Company { get; set; }
+        public int? CustomerLocationId { get; set; }
+        [ForeignKey("CustomerLocationId")]
+        [ValidateNever]
+        public CustomerLocation? CustomerLocation { get; set; }
+        [NotMapped]
+        public string Role { get; set; }
 
     }
 }

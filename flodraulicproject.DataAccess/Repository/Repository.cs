@@ -21,6 +21,7 @@ namespace flodraulicproject.DataAccess.Repository
             this.dbSet = _db.Set<T>();
             //_db.Categories = dbSet
             _db.Products.Include(u => u.Category).Include(u => u.CategoryId);
+            _db.Products.Include(u => u.PartFamily).Include(u => u.PartFamilyId);
         }
 
         public void Add(T entity)
