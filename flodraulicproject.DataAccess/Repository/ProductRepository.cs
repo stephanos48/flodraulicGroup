@@ -23,7 +23,7 @@ namespace flodraulicproject.DataAccess.Repository
             var objFromDb = _db.Products.FirstOrDefault(u => u.Id == obj.Id);
             if (objFromDb != null)
             {
-                objFromDb.PartNumber = objFromDb.PartNumber;
+                objFromDb.PartNumber = obj.PartNumber;
                 objFromDb.ListPrice = obj.ListPrice;
                 objFromDb.Qoh = obj.Qoh;
                 objFromDb.Description = obj.Description;
