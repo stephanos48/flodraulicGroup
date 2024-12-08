@@ -1,0 +1,96 @@
+﻿@model EcnLogCommentVM
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-black py-2"> @(Model.EcnLogComment.Id != 0 ? "Update" : "Create") Comment</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input hidden asp-for="EcnLogComment.Id" />
+            <input hidden asp-for="EcnLogComment.EcnLogId" />
+            <div class="row">
+                <div class="col-10">
+                    <div class="border p-3">
+                        @*<div asp-validation-summary="ModelOnly"></div>*@
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EcnLogComment.EcnLogId" class="form-control border-0 shadow" readonly="true" />
+                            <label asp-for="EcnLogComment.EcnLogId" class="ms-2"></label>
+                            <span asp-validation-for="EcnLogComment.EcnLogId" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EcnLogComment.Id" class="form-control border-0 shadow" readonly="true" />
+                            <label asp-for="EcnLogComment.Id" class="ms-2"></label>
+                            <span asp-validation-for="EcnLogComment.Id" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="Name" class="form-control border-0 shadow" readonly="true" />
+                            <label asp-for="Name" class="ms-2"></label>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EcnLogComment.CreatedBy" class="form-control border-0 shadow" readonly="true" />
+                            <label asp-for="EcnLogComment.CreatedBy" class="ms-2"></label>
+                            <span asp-validation-for="EcnLogComment.CreatedBy" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EcnLogComment.DateCreated" class="form-control border-0 shadow" readonly="true" />
+                            <label asp-for="EcnLogComment.DateCreated" class="ms-2"></label>
+                            <span asp-validation-for="EcnLogComment.DateCreated" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EcnLogComment.ModifiedBy" class="form-control border-0 shadow" readonly="true" />
+                            <label asp-for="EcnLogComment.ModifiedBy" class="ms-2"></label>
+                            <span asp-validation-for="EcnLogComment.ModifiedBy" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EcnLogComment.DateModified" class="form-control border-0 shadow" readonly="true" />
+                            <label asp-for="EcnLogComment.DateModified" class="ms-2"></label>
+                            <span asp-validation-for="EcnLogComment.DateModified" class="text-danger"></span>
+                        </div>
+                        <hr />
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EcnLogComment.Comment" class="form-control border-0 shadow" />
+                            <label asp-for="EcnLogComment.Comment" class="ms-2"></label>
+                            <span asp-validation-for="EcnLogComment.Comment" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EcnLogComment.Notes" class="form-control border-0 shadow" />
+                            <label asp-for="EcnLogComment.Notes" class="ms-2"></label>
+                            <span asp-validation-for="EcnLogComment.Notes" class="text-danger"></span>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-6 col-md-3">
+                                @if (Model.EcnLogComment.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                                }
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="EcnLog" asp-action="EcnLogComment" asp-route-id="@ViewBag.EcnLogId" class="btn btn-secondary border form-control">
+                                    Back to List
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

@@ -1,0 +1,63 @@
+﻿﻿@*@model IEnumerable<GuildCars.Models.Queries.SalesReport>
+
+@{
+    ViewBag.Title = "Sales";
+}
+
+<div class="row">
+
+    <h2>Savings Report</h2>
+    <div class="span" style="border: 1px solid black">
+        <form id="reportForm" class="form-inline">
+            <div class="row">
+                <div class="col-md-4">
+                    <br />
+
+                </div>
+
+                <div class="col-md-4">
+                    <label for="fromDate">From Date</label><br />
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fromDate">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="toDate">To Date</label><br />
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="toDate">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4">
+                    <button id="btnSearch" onclick="report()" class="btn btn-default col-md-4">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<br />
+<div class="row">
+    <h2>Search Results</h2>
+    <div class="searchResults">
+
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Total Sales</th>
+                    <th>Total Total Savings</th>
+                </tr>
+            </thead>
+            <tbody id="searchResults">
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/savings.js"></script>
+}*@

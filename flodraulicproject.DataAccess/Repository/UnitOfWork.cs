@@ -22,6 +22,30 @@ namespace flodraulicproject.DataAccess.Repository
         public IPartFamilyRepository PartFamily { get; private set; }
         public IInventoryRepository Inventory { get; private set; }
         public ICustomerLocationRepository CustomerLocation { get; private set; }
+        public IFloLocationRepository FloLocation { get; private set; }
+        public ITicketRepository Ticket { get; private set; }
+        public IStatusRepository Status { get; private set; }
+        public IShippedQtyRepository ShippedQty { get; private set; }
+        public IFloContactRepository FloContact { get; private set; }
+        public IWorkInstructionRepository WorkInstruction { get; private set; }
+        public IServiceManualRepository ServiceManual { get; private set; }
+        public ITicketStatusRepository TicketStatus { get; private set; }
+        public ITimeTrackerRepository TimeTracker { get; private set; }
+        public ILaborCodeRepository LaborCode { get; private set; }
+        public ISupplierRepository Supplier { get; private set; }
+        public ISupplierContactRepository SupplierContact { get; private set; }
+        public IMfgLocationRepository MfgLocation { get; private set; }
+        public ISalesLocationRepository SalesLocation { get; private set; }
+        public IEngineerRepository Engineer { get; private set; }
+        public IEstimatorRepository Estimator { get; private set; }
+        public ILogStatusRepository LogStatus { get; private set; }
+        public IEngineeringLogRepository EngineeringLog { get; private set; }
+        public IEngLogCommentRepository EngLogComment { get; private set; }
+        public IEngineeringLogImageRepository EngineeringLogImage { get; private set; }
+        public IEcnLogRepository EcnLog { get; private set; }
+        public IEcnLogImageRepository EcnLogImage { get; private set; }
+        public IEcnLogCommentRepository EcnLogComment { get; private set; }
+        public IEcnLogStatusRepository EcnLogStatus { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -36,7 +60,32 @@ namespace flodraulicproject.DataAccess.Repository
             PartFamily = new PartFamilyRepository(_db);
             Inventory = new InventoryRepository(_db);
             CustomerLocation = new CustomerLocationRepository(_db);
-    }
+            FloLocation = new FloLocationRepository(_db);
+            Ticket = new TicketRepository(_db);
+            Status = new StatusRepository(_db);
+            ShippedQty = new ShippedQtyRepository(_db);
+            FloContact = new FloContactRepository(_db);
+            WorkInstruction = new WorkInstructionRepository(_db);
+            ServiceManual = new ServiceManualRepository(_db);
+            TicketStatus = new TicketStatusRepository(_db);
+            TimeTracker = new TimeTrackerRepository(_db);
+            LaborCode = new LaborCodeRepository(_db);
+            Supplier = new SupplierRepository(_db);
+            SupplierContact = new SupplierContactRepository(_db);
+            LogStatus = new LogStatusRepository(_db);
+            MfgLocation = new MfgLocationRepository(_db);
+            SalesLocation = new SalesLocationRepository(_db);
+            Engineer = new EngineerRepository(_db);
+            Estimator = new EstimatorRepository(_db);
+            EngineeringLog = new EngineeringLogRepository(_db);
+            EngLogComment = new EngLogCommentRepository(_db);
+            EngineeringLogImage = new EngineeringLogImageRepository(_db);
+            EcnLog = new EcnLogRepository(_db);
+            EcnLogImage = new EcnLogImageRepository(_db);
+            EcnLogComment = new EcnLogCommentRepository(_db);
+            EcnLogStatus = new EcnLogStatusRepository(_db);
+
+        }
         public void Save()
         {
             _db.SaveChanges();

@@ -1,0 +1,101 @@
+﻿@model MilestoneMapVM;
+
+<div class="row">
+    <div class="col-12 col-md-2">
+        <a asp-area="Admin" asp-controller="Engineering" asp-action="TimeTrackerReports" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+            <small>Back</small>
+        </a>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="row">
+        <h2>Milestone Map: @Model.EngineeringLog.QuoteNo</h2>
+    </div>
+    <br />
+    <form method="post" class="row" enctype="multipart/form-data">
+    <input asp-for="EngineeringLog.Id" hidden />
+    <div class="row">
+        <div>
+            <table class="table table-bordered" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Milestone
+                        </th>
+                        <th>
+                            MilestoneDue
+                        </th>
+                        <th>
+                            MilestoneCompleted
+                        </th>
+                        <th>
+                            Completed By
+                        </th>
+                        <th>
+                            Form Link
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Initial Quote Review</td>
+                        <td>@Model.EngineeringLog.InitialQuoteReviewTargetDate</td>
+                        <td>@Model.EngineeringLog.InitialQuoteReviewDate</td>
+                        <td></td>
+                        <td>@Html.ActionLink("Initial Quote Review", "InitialQuoteReview", "EngineeringLog", new { id = @Model.EngineeringLog.Id })</td>
+                    </tr>
+                    <tr>
+                        <td>Final Quote Review</td>
+                        <td>@Model.EngineeringLog.FinalQuoteReviewTargetDate</td>
+                        <td>@Model.EngineeringLog.FinalQuoteReviewDate</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Contract Review</td>
+                        <td>@Model.EngineeringLog.ContractReviewTargetDate</td>
+                            <td>@Model.EngineeringLog.ContractReviewDate</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>OrderEntry</td>
+                            <td>@Model.EngineeringLog.OrderEntryTargetDate</td>
+                            <td>@Model.EngineeringLog.OrderEntryDate</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Kick Off</td>
+                            <td>@Model.EngineeringLog.KickOffTargetDate</td>
+                            <td>@Model.EngineeringLog.KickOffDate</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Financial Review</td>
+                            <td>@Model.EngineeringLog.FinancialReviewTargetDate</td>
+                            <td>@Model.EngineeringLog.FinancialReviewDate</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Initial Design Review</td>
+                            <td>@Model.EngineeringLog.InitialDesignReviewTargetDate</td>
+                            <td>@Model.EngineeringLog.InitialDesignReviewDate</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Final Design Review</td>
+                            <td>@Model.EngineeringLog.FinalDesignReviewTargetDate</td>
+                            <td>@Model.EngineeringLog.FinalDesignReviewDate</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Shop Release</td>
+                            <td>@Model.EngineeringLog.ShopReleaseTargetDate</td>
+                            <td>@Model.EngineeringLog.ShopReleaseDate</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </form>
+</div>

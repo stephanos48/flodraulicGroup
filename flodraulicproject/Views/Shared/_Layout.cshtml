@@ -20,7 +20,9 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
+
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/Images/flo.png" alt="image" width="200"></a>
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -28,16 +30,43 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Categories">Products</a>
+                            @if (User.IsInRole(SD.Role_Admin))
+                            {
+                                 <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="LandingPage">Home</a>
+                                </li>
+                            }
+                            else if (User.IsInRole(SD.Role_Company) || User.IsInRole(SD.Role_Captain))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="LandingPageCryo">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="OrderListBasic">Order Status</a>
+                                </li>
+                            }
+                            else if (User.IsInRole(SD.Role_Sergeant))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Engineering">Home</a>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                            }
                         </li>
 
                         @if (User.IsInRole(SD.Role_Admin))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Order</a>
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="PumpsList">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Order" asp-action="OrderList">Manage Order</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,6 +84,21 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="dropdown-item" asp-area="Admin" asp-controller="CustomerLocation" asp-action="Index">Customer Location</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="FloLocation" asp-action="Index">Flo Location</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Inventory" asp-action="Index">Inventory</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="WorkInstruction" asp-action="Index">Work Instruction</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="ServiceManual" asp-action="Index">Service Manual</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Engineer" asp-action="Index">Engineer</a>
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li class="nav-item">
@@ -116,7 +160,6 @@
     <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js" asp-append-version="true"></script>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="~lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -1,0 +1,170 @@
+﻿@model TimeTrackerVM1;
+
+<div class="row">
+    <div class="col-12 col-md-2">
+        <a asp-area="Admin" asp-controller="Engineering" asp-action="TimeTrackerReports" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+            <small>Back</small>
+        </a>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="row">
+        <h2>Engineer Overview</h2>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-bordered" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Metric Name
+                        </th>
+                        <th>
+                            Current Data
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Current Open Projects</td>
+                        <td>@Model.OpenProjects</td>
+                    </tr>
+                    <tr>
+                        <td>Current Projects Over Hrs</td>
+                        <td>@Model.OpenProjectsOverHrs</td>
+                    </tr>
+                    <tr>
+                        <td>Open Quoted Eng Hrs</td>
+                        <td>@Model.QuotedEngHrs</td>
+                    </tr>
+                    <tr>
+                        <td>Open Actual Eng Hrs</td>
+                        <td>@Model.ActualEngHrs</td>
+                    </tr>
+                    <tr>
+                        <td>Current Open Eff</td>
+                        <td>@Model.CurrentOpenEff</td>
+                    </tr>
+                    <tr>
+                        <td>Completed Projects</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Completed Projects Over Hrs</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Completed Quoted Eng Hrs</td>
+                        <td>@Model.QuotedEngHrs</td>
+                    </tr>
+                    <tr>
+                        <td>Completed Actual Eng Hrs</td>
+                        <td>@Model.ActualEngHrs</td>
+                    </tr>
+                    <tr>
+                        <td>Completed Project Eff</td>
+                        <td>@Model.CurrentOpenEff</td>
+                    </tr>
+                    <tr>
+                        <td>Additional Costs due to Eng Errors</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>ECNs due to Eng Error</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Hotlists due to Eng Error</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row col-6">
+            <div class="text-center mb-3">
+                <img src="@Model.ImageUrl" width="100%" class="" />
+                <br />
+                <br />
+                <h5><b>Engineer:</b> @Model.Name</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <table id="tblData" class="table table-bordered table-striped" width="100%">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    Id
+                </th>
+                <th>
+                    QuoteNo
+                </th>
+                <th>
+                    JobNo
+                </th>
+                <th>
+                    NoECNs
+                </th>
+                <th>
+                    EngErrorHrs
+                </th>
+                <th>
+                    QuotedEngHrs
+                </th>
+                <th>
+                    ActualEngHrs
+                </th>
+                <th>
+                    Eff
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.EngViewMetricsVMs)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Upsert", new { id = item.Id }) |
+                        @Html.ActionLink("Comments", "EngLogComment", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+
+                    <td>@Html.DisplayFor(modelItem => item.QuotedEngHrs)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ActualEngHrs)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#shipplan").DataTable({
+                'iDisplayLength': 200
+            });
+        });
+
+    </script>
+
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script type="text/javascript">
+        $('#btn').click(function () {
+            $('.table').table2excel({
+                name: "download",
+                filename: "download",
+                fileext: ".xlsx"
+            });
+        });
+    </script>
+}

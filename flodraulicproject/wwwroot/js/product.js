@@ -6,13 +6,17 @@ $(document).ready(function () {
 
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
-        "ajax": { url:'/admin/product/getall'},
+        'iDisplayLength': 50, 
+        "ajax": { url: '/admin/product/getall' },
         "columns": [
+            { data: 'id', "width": "5%" },
+            { data: 'imageUrl', "render": function (data) { return '<img src="' + data + '" class="avatar" width="100" height="50"/>'; }, "width": "10" },
             { data: 'partNumber', "width": "15%" },
-            { data: 'description', "width": "20%" },
+            { data: 'description', "width": "15%" },
             { data: 'listPrice', "width": "10%" },
+            { data: 'discountPrice', "width": "10%" },
             { data: 'qoh', "width": "10%"},
-            { data: 'partFamily.familyName', "width": "15" },
+            { data: 'partFamily.familyName', "width": "10" },
             //{ data: 'category.name', "width": "15" },
 
             {
@@ -23,7 +27,7 @@ function loadDataTable() {
                     <a onClick=Delete('/admin/product/delete/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
                     </div>`
                 },
-                "width": "30%"
+                "width": "25%"
             }
         ]
     });

@@ -1,0 +1,372 @@
+﻿@model EngineeringLogVM
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-black py-2"> @(Model.EngineeringLog.Id != 0 ? "Update" : "Create") Log Entry</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="EngineeringLog.Id" hidden />
+            <div class="row">
+                <h2>Quote Info</h2>
+                <div class="col-6">
+                    <h3>Initial RFQ Review</h3>
+                    <div class="border p-3">
+                        @*<div asp-validation-summary="ModelOnly"></div>*@
+                        <div class="form-floating py-2 col-12">
+                            <label asp-for="EngineeringLog.LogStatus" class="ms-2"></label>
+                            <select asp-for="EngineeringLog.LogStatusId" asp-items="@ViewBag.LogStatusList" class="form-select"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.QuoteNo" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.QuoteNo" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.QuoteNo" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.HistoricQuoteNo" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.HistoricQuoteNo" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.HistoricQuoteNo" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.Customer" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.Customer" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.Customer" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.SystemDescription" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.SystemDescription" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.SystemDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <label asp-for="EngineeringLog.SalesLocation" class="ms-2"></label>
+                            <select asp-for="EngineeringLog.SalesLocationId" asp-items="@ViewBag.SalesLocationList" class="form-select"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <label asp-for="EngineeringLog.MfgLocation" class="ms-2"></label>
+                            <select asp-for="EngineeringLog.MfgLocationId" asp-items="@ViewBag.MfgLocationList" class="form-select"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.SalesPerson" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.SalesPerson" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.SalesPerson" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.Qty" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.Qty" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.Qty" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.InitialQuoteReviewTargetDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.InitialQuoteReviewTargetDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.InitialQuoteReviewTargetDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.InitialQuoteReviewDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.InitialQuoteReviewDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.InitialQuoteReviewDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h3>Final Quote Review</h3>
+                    <div class="border p-3">
+                        <div class="form-floating py-2 col-12">
+                            <label asp-for="EngineeringLog.Estimator" class="ms-2"></label>
+                            <select asp-for="EngineeringLog.EstimatorId" asp-items="@ViewBag.EstimatorList" class="form-select"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.QuoteTargetDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.QuoteTargetDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.QuoteTargetDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.QuoteDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.QuoteDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.QuoteDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.FinalQuoteReviewTargetDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.FinalQuoteReviewTargetDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.FinalQuoteReviewTargetDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.FinalQuoteReviewDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.FinalQuoteReviewDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.FinalQuoteReviewDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.QuoteValue" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.QuoteValue" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.QuoteValue" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h3>Contract Review / Order Entry</h3>
+                    <div class="border p-3">
+                        @*<div asp-validation-summary="ModelOnly"></div>*@
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.JobNumber" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.JobNumber" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.JobNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.OrderDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.OrderDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.OrderDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.CustomerPoNo" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.CustomerPoNo" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.CustomerPoNo" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.ContractReviewTargetDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.ContractReviewTargetDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.ContractReviewTargetDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.ContractReviewDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.ContractReviewDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.ContractReviewDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.OrderEntryTargetDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.OrderEntryTargetDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.OrderEntryTargetDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.OrderEntryDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.OrderEntryDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.OrderEntryDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.PromiseDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.PromiseDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.PromiseDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.MIPTargetDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.MIPTargetDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.MIPTargetDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.MIPDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.MIPDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.MIPDate" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <h2>Engineering Info</h2>
+                <div class="col-6">
+                    <h3>Kick Off / Financial Review</h3>
+                    <div class="border p-3">
+                        @*<div asp-validation-summary="ModelOnly"></div>*@
+                        <div class="form-floating py-2 col-12">
+                            <label asp-for="EngineeringLog.Engineer" class="ms-2"></label>
+                            <select asp-for="EngineeringLog.EngineerId" asp-items="@ViewBag.EngineerList" class="form-select"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.KickOffTargetDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.KickOffTargetDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.KickOffTargetDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.KickOffDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.KickOffDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.KickOffDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.FinancialReviewTargetDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.FinancialReviewTargetDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.FinancialReviewTargetDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.FinancialReviewDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.FinancialReviewDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.FinancialReviewDate" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h3>Design Review / Shop Release</h3>
+                    <div class="border p-3">
+                        @*<div asp-validation-summary="ModelOnly"></div>*@
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.InitialDesignReviewTargetDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.InitialDesignReviewTargetDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.InitialDesignReviewTargetDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.InitialDesignReviewDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.InitialDesignReviewDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.InitialDesignReviewDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.FinalDesignReviewTargetDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.FinalDesignReviewTargetDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.FinalDesignReviewTargetDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.FinalDesignReviewDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.FinalDesignReviewDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.FinalDesignReviewDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.ShopReleaseTargetDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.ShopReleaseTargetDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.ShopReleaseTargetDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="EngineeringLog.ShopReleaseDate" class="form-control border-0 shadow" />
+                            <label asp-for="EngineeringLog.ShopReleaseDate" class="ms-2"></label>
+                            <span asp-validation-for="EngineeringLog.ShopReleaseDate" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <h2>Data / Metric Tracking</h2>
+                    <div class="col-6">
+                        <h3>Project Data</h3>
+                        <div class="border p-3">
+                            @*<div asp-validation-summary="ModelOnly"></div>*@
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="EngineeringLog.QuotedEngHrs" class="form-control border-0 shadow" />
+                                <label asp-for="EngineeringLog.QuotedEngHrs" class="ms-2"></label>
+                                <span asp-validation-for="EngineeringLog.QuotedEngHrs" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="EngineeringLog.QuotedShopHrs" class="form-control border-0 shadow" />
+                                <label asp-for="EngineeringLog.QuotedShopHrs" class="ms-2"></label>
+                                <span asp-validation-for="EngineeringLog.QuotedShopHrs" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="EngineeringLog.ActualEngHrs" class="form-control border-0 shadow" />
+                                <label asp-for="EngineeringLog.ActualEngHrs" class="ms-2"></label>
+                                <span asp-validation-for="EngineeringLog.ActualEngHrs" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="EngineeringLog.ActualShopHrs" class="form-control border-0 shadow" />
+                                <label asp-for="EngineeringLog.ActualShopHrs" class="ms-2"></label>
+                                <span asp-validation-for="EngineeringLog.ActualShopHrs" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="EngineeringLog.EngEff" class="form-control border-0 shadow" />
+                                <label asp-for="EngineeringLog.EngEff" class="ms-2"></label>
+                                <span asp-validation-for="EngineeringLog.EngEff" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="EngineeringLog.ShopEff" class="form-control border-0 shadow" />
+                                <label asp-for="EngineeringLog.ShopEff" class="ms-2"></label>
+                                <span asp-validation-for="EngineeringLog.ShopEff" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="EngineeringLog.TotalCost" class="form-control border-0 shadow" />
+                                <label asp-for="EngineeringLog.TotalCost" class="ms-2"></label>
+                                <span asp-validation-for="EngineeringLog.TotalCost" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h3>Metric Tracking</h3>
+                        <div class="border p-3">
+                            @*<div asp-validation-summary="ModelOnly"></div>*@
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="EngineeringLog.TotalCost" class="form-control border-0 shadow" />
+                                <label asp-for="EngineeringLog.TotalCost" class="ms-2"></label>
+                                <span asp-validation-for="EngineeringLog.TotalCost" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="EngineeringLog.ActualShipDate" class="form-control border-0 shadow" />
+                                <label asp-for="EngineeringLog.ActualShipDate" class="ms-2"></label>
+                                <span asp-validation-for="EngineeringLog.ActualShipDate" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label asp-for="EngineeringLog.QuotedOT"></label>
+                                <input asp-for="EngineeringLog.QuotedOT" type="checkbox" />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label asp-for="EngineeringLog.MIPOT"></label>
+                                <input asp-for="EngineeringLog.MIPOT" type="checkbox" />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label asp-for="EngineeringLog.DesignOT"></label>
+                                <input asp-for="EngineeringLog.DesignOT" type="checkbox" />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label asp-for="EngineeringLog.ShipOT"></label>
+                                <input asp-for="EngineeringLog.ShipOT" type="checkbox" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Redline Info / Misc. Notes</h3>
+                        <div class="border p-3">
+                            @*<div asp-validation-summary="ModelOnly"></div>*@
+                            <div class="form-group">
+                                <label asp-for="EngineeringLog.RedlineNeeded"></label>
+                                <input asp-for="EngineeringLog.RedlineNeeded" type="checkbox" />
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="EngineeringLog.RedlineCompletionDate" class="form-control border-0 shadow" />
+                                <label asp-for="EngineeringLog.RedlineCompletionDate" class="ms-2"></label>
+                                <span asp-validation-for="EngineeringLog.RedlineCompletionDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="EngineeringLog.Notes" class="form-control border-0 shadow" />
+                                <label asp-for="EngineeringLog.Notes" class="ms-2"></label>
+                                <span asp-validation-for="EngineeringLog.Notes" class="text-danger"></span>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row pt-2">
+                <div class="col-6 col-md-3">
+                    @if (Model.EngineeringLog.Id != 0)
+                    {
+                        <button type="submit" class="btn btn-primary form-control">Update</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary form-control">Create</button>
+                    }
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-controller="EngineeringLog" asp-action="Index" class="btn btn-secondary border form-control">
+                        Back to List
+                    </a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    <script>
+
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

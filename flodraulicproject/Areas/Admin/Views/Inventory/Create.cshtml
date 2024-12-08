@@ -1,0 +1,106 @@
+﻿@model InventoryVM
+
+<form method="post">
+
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Inventory</h2>
+            <hr/>
+        </div>
+        @*<div asp-validation-summary="All"></div>*@
+
+        @*<div class="form-floating py-2 col-12">
+            <select asp-for="Inventory.ProductId" asp-items="@Model.Products" class="form-select border-0 shadow">
+                <option disabled selected>--Select Part Number--</option>
+            </select>
+            <label asp-for="Inventory.ProductId" class="ms-2"></label>
+            <span asp-validation-for="Inventory.ProductId" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating py-2 col-12">
+            <select asp-for="Inventory.FloLocationId" asp-items="@Model.FloLocationList" class="form-select border-0 shadow">
+                <option disabled selected>--Select Location--</option>
+            </select>
+            <label asp-for="Inventory.FloLocationId" class="ms-2"></label>
+            <span asp-validation-for="Inventory.FloLocationId" class="text-danger"></span>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inventory.ProductId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Inventory.ProductId, new SelectList(Model.Products, "Id", "PartNumber"), "Select Product", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Inventory.ProductId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inventory.FloLocationId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Inventory.FloLocationId, new SelectList(Model.FloLocations, "FloLocationId", "LocationName"), "Select Location", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Inventory.FloLocationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row p-1">
+            <label class="p-0">QOH</label>
+            <input asp-for="Inventory.StartQoh" class="form-control" />
+            <span asp-validation-for="Inventory.StartQoh" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Create</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Inventory" asp-action="Index" class="btn btn-secondary border form-control">
+                    Back to List
+                </a>
+            </div>
+        </div>
+
+       @* <div class="form-group">
+            @Html.LabelFor(model => model.Inventory.ProductId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Inventory.ProductId, new SelectList(Model.Products, "Id", "PartNumber"), "Select Product", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Inventory.ProductId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inventory.FloLocationId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Inventory.FloLocationId, new SelectList(Model.FloLocations, "FloLocationId", "LocationName"), "Select Location", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Inventory.FloLocationId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Inventory.StartQoh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Inventory.StartQoh, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Inventory.StartQoh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Create</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Inventory" asp-action="Index" class="btn btn-secondary border form-control">
+                    Back to List
+                </a>
+            </div>
+        </div>
+    </div>*@
+
+    </div>
+
+</form>
+
+@*
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}*@

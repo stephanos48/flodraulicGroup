@@ -1,0 +1,67 @@
+﻿@using flodraulicproject.Utility
+
+<div class="container mt-4">
+    <div style="text-align: center">
+        @if (User.IsInRole(SD.Role_Admin))
+        {
+            <div class="row">
+                <div class="col-6 col-md-2">
+                    <a asp-area="Customer" asp-controller="Home" asp-action="LandingPage" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                        <small>Back</small>
+                    </a>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <br />
+            <div class="col-12 text-center">
+                <h2>Engineering</h2>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-3">
+                <h3><i class="fa fa-modx"></i></h3>
+                <a asp-area= "Admin" asp-controller="Engineering" asp-action="TTList" class="btn ">
+                    <i class="bi bi-cpu"></i> Time Tracker
+                </a>
+            </div>
+            <div class="col-md-3">
+                <h3><i class="fa fa-modx"></i></h3>
+                <a asp-area="Admin" asp-controller="EngineeringLog" asp-action="Index" class="btn ">
+                    <i class="bi bi-cpu"></i> Engineering Log
+                </a>
+            </div>
+            <div class="col-md-3">
+                <h3><i class="fa fa-modx"></i></h3>
+                <a asp-area="Admin" asp-controller="EcnLog" asp-action="Index" class="btn ">
+                    <i class="bi bi-cpu"></i> ECN / PCN Log - Under Construction
+                </a>
+            </div>
+            <div class="col-md-3">
+                <h3><i class="fa fa-modx"></i></h3>
+                <a asp-area="Admin" asp-controller="HotListLog" asp-action="Index" class="btn ">
+                    <i class="bi bi-cpu"></i> Hotlist Log - Under Construction
+                </a>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        @if (User.IsInRole(SD.Role_Sergeant) || (User.IsInRole(SD.Role_Admin)))
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    <h3><i class="fa fa-paper-plane"></i></h3>
+                    <a asp-area="Admin" asp-controller="Engineering" asp-action="LandingPageEngAdmin" class="btn ">
+                        <i class="bi bi-pencil"></i> Admin Area
+                    </a>
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

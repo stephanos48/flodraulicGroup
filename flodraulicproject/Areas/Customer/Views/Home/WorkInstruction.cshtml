@@ -1,0 +1,109 @@
+﻿@model List<WorkInstruction>
+
+<div class="row">
+    <div class="col-6 col-md-2">
+        <a asp-controller="Home" asp-action="LandingPageCryo" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+            <small>Back</small>
+        </a>
+    </div>
+</div>
+@*
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="col-6">
+            <div class="row">
+                <h2 class="text-primary">Work Instructions</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+
+            </div>
+            <div class="col-6 text-end">
+
+            </div>
+        </div>
+
+        <table id="tblData" class="table table-bordered table-striped" width="100%">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        WI Name
+                    </th>
+                    <th>
+                        WI Type
+                    </th>
+                    <th>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+*@
+        <div class="card-body p-4">
+            <div class="row pb-2">
+                <div class="col-6">
+                </div>
+                @*<div class="col-6 text-end">
+                <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create New Product
+                </a>
+                </div>*@
+            </div>
+            <table id="tblData" class="table table-bordered table-striped" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            WI Name
+                        </th>
+                        <th>
+                            WI Type
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PfepId })|
+                    @Html.ActionLink("Details", "Details", new { id = item.PfepId })|
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PfepId })
+                    </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WIName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WIType)
+                        </td>
+                        @*<td>@Html.ActionLink("Update", "Details", new { orderId = item.Id })</td>*@
+                        <td>
+                            @*<a asp-controller="Order" asp-action="Details" asp-route-orderId="@item.Id" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i> Update
+                            </a>*@
+                            <a href='/admin/workinstruction/download?id=${data}' class="btn btn-primary mx-2"> Download</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+
+@section Scripts {
+    <script src="~/js/workinstruction1.js"></script>
+}
+

@@ -1,0 +1,224 @@
+﻿@model TimeTrackerVM1;
+<div class="container mt-4">
+
+        <div class="row">
+            <div class="col-6 col-md-2">
+                <a asp-area="Admin" asp-controller="Engineering" asp-action="TimeTrackerReports" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                    <small>Back</small>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <h2 class="text-primary">Employee Efficiency Report</h2>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Engineer.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Engineer.Id, new SelectList(Model.Engineers, "Id", "EngineerName"), "Select Engineer", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Engineer.Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                </div>
+
+            </div>*@
+
+            <br />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Run Report" class="btn btn-primary" />
+                </div>
+            </div>
+            
+        }
+
+</div>
+
+@*
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="col-6">
+            <div class="row">
+                <h2 class="text-primary">Savings Report</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Create New Product
+            </a>
+            </div>
+        </div>
+        <table id="tblData" class="table table-bordered table-striped" width="100%">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Order Date
+                    </th>
+                    <th>
+                        Purchase Order No
+                    </th>
+                    <th>
+                        User
+                    </th>
+                    <th>
+                        List Order Total
+                    </th>
+                    <th>
+                        Discount Order Total
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="searchResults">
+            </tbody>
+        </table>
+    </div>
+</div>
+*@
+
+@*
+<div class="row">
+
+    <h2>Savings Report</h2>
+    <div class="span" style="border: 1px solid black">
+        <form id="reportForm" class="form-inline">
+            <div class="row">
+                <div class="col-md-4">
+                    <br />
+
+                </div>
+
+                <div class="col-md-4">
+                    <label for="fromDate">From Date</label><br />
+                    <div class="form-group">
+                        <input type="datetime" class="form-control" id="fromDate">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="toDate">To Date</label><br />
+                    <div class="form-group">
+                        <input type="datetime" class="form-control" id="toDate">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4">
+                    <button id="btnSearch" onclick="report()" class="btn btn-default col-md-4">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<div class="row">
+    <h2>Search Results</h2>
+    <div class="searchResults">
+
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Order Date
+                    </th>
+                    <th>
+                        Purchase Order No
+                    </th>
+                    <th>
+                        User
+                    </th>
+                    <th>
+                        List Order Total
+                    </th>
+                    <th>
+                        Discount Order Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="searchResults">
+            </tbody>
+        </table>
+
+    </div>
+</div>
+*@
+
+@section Scripts {
+    <script>
+
+        $(document).ready(function () {
+            $("#reportForm").submit(function (e) {
+                report();
+                return false;
+            });
+        });
+
+        function report() {
+            var params;
+
+            params = '&fromDate=' + $('#fromDate').val() + '&toDate=' + $('#toDate').val();
+
+            $.ajax({
+                type: 'GET',
+                url: '/admin/order/orderlistreport?' + params,
+                success: function (results) {
+                    $('#searchResults').empty();
+
+                    $.each(results, function (orderlistreport, order) {
+                        var html =
+                            '<tr>' +
+                            '<td>' + order.Id + '<td>' +
+                            '<td>' + order.OrderDate + '<td>' +
+                            '<td>' + order.PurchaseOrderNo + '<td>' +
+                            '<td>' + order.Email + '<td>' +
+                            '<td>' + order.ListOrderTotal + '<td>' +
+                            '<td>' + order.OrderTotal + '<td>' +
+                            '<tr>';
+
+                        $('#searchResults').append(html.toString());
+                    });
+
+                },
+                error: function () {
+                    alert('Error performing search, try again later!')
+                }
+
+
+            });
+
+        }
+    
+    </script>
+}

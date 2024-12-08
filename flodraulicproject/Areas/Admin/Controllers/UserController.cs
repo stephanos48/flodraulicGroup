@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace flodraulicproject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)]
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Captain)]
     public class UserController : Controller
     {
         //private readonly ApplicationDbContext _db;
@@ -48,6 +48,11 @@ namespace flodraulicproject.Areas.Admin.Controllers
                     Text = i.Name,
                     Value = i.Id.ToString(),
                 }),
+                CustomerLocationList = _db.CustomerLocations.Select(i => new SelectListItem
+                {
+                    Text = i.LocationName,
+                    Value = i.CustomerLocationId.ToString(),
+                })
             };
 
             RoleVM.ApplicationUser.Role = _db.Roles.FirstOrDefault(u => u.Id == RoleID).Name;
@@ -59,7 +64,9 @@ namespace flodraulicproject.Areas.Admin.Controllers
         public IActionResult RoleManagement(RoleManagementVM roleManagementVM)
         {
             string RoleID = _db.UserRoles.FirstOrDefault(u => u.UserId == roleManagementVM.ApplicationUser.Id).RoleId;
+            //string LocationId = _db.CustomerLocations.FirstOrDefault(y => y.CustomerLocationId == roleManagementVM.ApplicationUser.CustomerLocationId).CustomerLocationId;
             string oldRole = _db.Roles.FirstOrDefault(u => u.Id == RoleID).Name;
+
 
             if(!(roleManagementVM.ApplicationUser.Role == oldRole))
             {
@@ -72,6 +79,9 @@ namespace flodraulicproject.Areas.Admin.Controllers
                 {
                     applicationUser.CompanyId = null;
                 }
+
+                //user location was updated
+
 
                 _db.SaveChanges();
 

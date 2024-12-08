@@ -404,6 +404,1147 @@ namespace flodraulicproject.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("flodraulicproject.Models.EcnLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("AffectPrice")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal?>("CostImpact")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerApprovalReq")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("ECNAddlEngHrs")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("ECNAddlShopHrs")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("EcnCompletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EcnLogStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("EcnRequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EngineeringLogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("PCNAddlEngHrs")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("PCNAddlShopHrs")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RespToProcess")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EcnLogStatusId");
+
+                    b.HasIndex("EngineeringLogId");
+
+                    b.ToTable("EcnLogs");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EcnLogComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EcnLogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EcnLogId");
+
+                    b.ToTable("EcnLogComments");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EcnLogImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EcnLogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EcnLogId");
+
+                    b.ToTable("EcnLogImages");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EcnLogStatus", b =>
+                {
+                    b.Property<int>("EcnLogStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EcnLogStatusId"));
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EcnLogStatusId");
+
+                    b.ToTable("EcnLogStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            EcnLogStatusId = 1,
+                            Notes = "",
+                            StatusName = "New"
+                        },
+                        new
+                        {
+                            EcnLogStatusId = 2,
+                            Notes = "",
+                            StatusName = "In Process"
+                        },
+                        new
+                        {
+                            EcnLogStatusId = 3,
+                            Notes = "",
+                            StatusName = "Complete"
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EngLogComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EngineeringLogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EngineeringLogId");
+
+                    b.ToTable("EngLogComments");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.Engineer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("EngineerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Engineers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EngineerName = "Anthony Bizon",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EngineerName = "Brian Paxton",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EngineerName = "Chris Dewandeler",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EngineerName = "Chris Johnson",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EngineerName = "Chris Walker",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EngineerName = "Darren Zielke",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 7,
+                            EngineerName = "David Bucek",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 8,
+                            EngineerName = "Daymon Shear",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 9,
+                            EngineerName = "Derrick Herr",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 10,
+                            EngineerName = "Dylan Smith",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 11,
+                            EngineerName = "Kyle Swindlehurst",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 12,
+                            EngineerName = "Paul Brown",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 13,
+                            EngineerName = "Phil Kimberlin",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 14,
+                            EngineerName = "Randy Brown",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 15,
+                            EngineerName = "Scott Tidwell",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 16,
+                            EngineerName = "Dylan Smith",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 17,
+                            EngineerName = "Gaylynn Fisher",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 18,
+                            EngineerName = "Frank Edwards",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 19,
+                            EngineerName = "Joe Marshall",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 20,
+                            EngineerName = "Pat Laake",
+                            ImageUrl = "",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 21,
+                            EngineerName = "Pending",
+                            ImageUrl = "",
+                            Notes = ""
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EngineeringLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal?>("ActualEngHrs")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateOnly?>("ActualShipDate")
+                        .HasColumnType("date");
+
+                    b.Property<decimal?>("ActualShopHrs")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("ContractReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ContractReviewTargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Customer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerPoNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("DesignOT")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal?>("EngEff")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("EngineerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EstimatorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("FinalDesignReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FinalDesignReviewTargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FinalQuoteReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FinalQuoteReviewTargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FinancialReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FinancialReviewTargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HistoricQuoteNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("InitialDesignReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("InitialDesignReviewTargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("InitialQuoteReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("InitialQuoteReviewTargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("JobNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("KickOffDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("KickOffTargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LogStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("MIPDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("MIPOT")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("MIPTargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MfgLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("OrderEntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("OrderEntryTargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("PromiseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Qty")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("QuoteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("QuoteNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("QuoteRequestReceivedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("QuoteTargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("QuoteValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("QuotedEngHrs")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("QuotedOT")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal?>("QuotedShopHrs")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("RedlineCompletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("RedlineNeeded")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SalesLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SalesPerson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ShipOT")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal?>("ShopEff")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("ShopReleaseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ShopReleaseTargetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SystemDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly?>("TargetShipDate")
+                        .HasColumnType("date");
+
+                    b.Property<decimal?>("TotalCost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EngineerId");
+
+                    b.HasIndex("EstimatorId");
+
+                    b.HasIndex("LogStatusId");
+
+                    b.HasIndex("MfgLocationId");
+
+                    b.HasIndex("SalesLocationId");
+
+                    b.ToTable("EngineeringLogs");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EngineeringLogImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EngineeringLogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EngineeringLogId");
+
+                    b.ToTable("EngineeringLogImages");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.Estimator", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("EstimatorName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Estimators");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EstimatorName = "Chris Walker",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EstimatorName = "Derrick Herr",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EstimatorName = "Frank Edwards",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EstimatorName = "Jeff Pogue",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EstimatorName = "Joe Sorano",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EstimatorName = "Kyle Swindlehurst",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 7,
+                            EstimatorName = "Noelle Sorano",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 8,
+                            EstimatorName = "Pat Laake",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 9,
+                            EstimatorName = "Paul Brown",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 10,
+                            EstimatorName = "Joe Marshall",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 11,
+                            EstimatorName = "John Reed",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 12,
+                            EstimatorName = "John Voss",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 13,
+                            EstimatorName = "John Wheelock",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 14,
+                            EstimatorName = "Scott Tidwell",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 15,
+                            EstimatorName = "Scott Williams",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 16,
+                            EstimatorName = "Theresa Schmittling",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 17,
+                            EstimatorName = "Dave Bucek",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 18,
+                            EstimatorName = "Inside Sales",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 19,
+                            EstimatorName = "Unknown",
+                            Notes = ""
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.FloContact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FloLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FloLocationId");
+
+                    b.ToTable("FloContacts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "stephen.english@me.com",
+                            FloLocationId = 1,
+                            Name = "Stephen English",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "trobbins@gmail.com",
+                            FloLocationId = 2,
+                            Name = "Tim Robbins",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "henglish@gmail.com",
+                            FloLocationId = 3,
+                            Name = "Helen English",
+                            Notes = ""
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.FloLocation", b =>
+                {
+                    b.Property<int>("FloLocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FloLocationId"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FloLocationId");
+
+                    b.ToTable("FloLocations");
+
+                    b.HasData(
+                        new
+                        {
+                            FloLocationId = 1,
+                            Address = "",
+                            City = "",
+                            Country = "",
+                            LocationName = "ATL",
+                            Notes = "",
+                            State = "",
+                            ZipCode = ""
+                        },
+                        new
+                        {
+                            FloLocationId = 2,
+                            Address = "",
+                            City = "",
+                            Country = "",
+                            LocationName = "DFW",
+                            Notes = "",
+                            State = "",
+                            ZipCode = ""
+                        },
+                        new
+                        {
+                            FloLocationId = 3,
+                            Address = "",
+                            City = "",
+                            Country = "",
+                            LocationName = "HOU",
+                            Notes = "",
+                            State = "",
+                            ZipCode = ""
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.Hotlist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Coordinator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Customer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EngineerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HotlistRespId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HotlistStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("HrsLost")
+                        .HasColumnType("float");
+
+                    b.Property<int>("IssueCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IssueDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReportedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("TotalDollarsLost")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("WorkStoppage")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EngineerId");
+
+                    b.HasIndex("HotlistRespId");
+
+                    b.HasIndex("HotlistStatusId");
+
+                    b.HasIndex("IssueCategoryId");
+
+                    b.ToTable("Hotlists");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.HotlistComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HotlistId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HotlistId");
+
+                    b.ToTable("HotlistComments");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.HotlistImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("HotlistId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HotlistId");
+
+                    b.ToTable("HotlistImages");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.HotlistResp", b =>
+                {
+                    b.Property<int>("HotlistRespId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HotlistRespId"));
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RespName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("HotlistRespId");
+
+                    b.ToTable("HotlistResps");
+
+                    b.HasData(
+                        new
+                        {
+                            HotlistRespId = 1,
+                            Notes = "",
+                            RespName = "Supplier"
+                        },
+                        new
+                        {
+                            HotlistRespId = 2,
+                            Notes = "",
+                            RespName = "Purchasing"
+                        },
+                        new
+                        {
+                            HotlistRespId = 3,
+                            Notes = "",
+                            RespName = "Engineering"
+                        },
+                        new
+                        {
+                            HotlistRespId = 4,
+                            Notes = "",
+                            RespName = "Operations"
+                        },
+                        new
+                        {
+                            HotlistRespId = 5,
+                            Notes = "",
+                            RespName = "Other"
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.HotlistStatus", b =>
+                {
+                    b.Property<int>("HotlistStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HotlistStatusId"));
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("HotlistStatusId");
+
+                    b.ToTable("HotlistStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            HotlistStatusId = 1,
+                            Notes = "",
+                            StatusName = "New"
+                        },
+                        new
+                        {
+                            HotlistStatusId = 2,
+                            Notes = "",
+                            StatusName = "In Process"
+                        },
+                        new
+                        {
+                            HotlistStatusId = 3,
+                            Notes = "",
+                            StatusName = "Complete"
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.InitialQuoteReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Concerns")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ConfirmFGIForm")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("CustomerSpecsReq")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("CustomerWaitToTarget")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Engineer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EngineeringLogId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("FGIForm")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FGIFormDetail")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("FallWithinFGICapability")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("InitialQuoteCompletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IntiateQuote")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("MeetCustomerDate")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SimilarJob")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Suggestions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SystemType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EngineeringLogId");
+
+                    b.ToTable("InitialQuoteReviews");
+                });
+
             modelBuilder.Entity("flodraulicproject.Models.Inventory", b =>
                 {
                     b.Property<int>("Id")
@@ -412,14 +1553,26 @@ namespace flodraulicproject.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("PartNumber")
-                        .IsRequired()
+                    b.Property<int>("FloLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LocationName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<int>("StartQoh")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FloLocationId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Inventories");
 
@@ -427,27 +1580,317 @@ namespace flodraulicproject.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            PartNumber = "2000-3900",
+                            FloLocationId = 1,
+                            ProductId = 1,
                             StartQoh = 1
                         },
                         new
                         {
                             Id = 2,
-                            PartNumber = "219-2370",
+                            FloLocationId = 2,
+                            ProductId = 2,
                             StartQoh = 10
                         },
                         new
                         {
                             Id = 3,
-                            PartNumber = "031-6450",
+                            FloLocationId = 3,
+                            ProductId = 3,
                             StartQoh = 0
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.IssueCategory", b =>
+                {
+                    b.Property<int>("IssueCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IssueCategoryId"));
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IssueCategoryId");
+
+                    b.ToTable("IssueCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            IssueCategoryId = 1,
+                            CategoryName = "Design Issue",
+                            Notes = ""
                         },
                         new
                         {
-                            Id = 4,
-                            PartNumber = "222-6780",
-                            StartQoh = 4
+                            IssueCategoryId = 2,
+                            CategoryName = "Drawing Creation Issue",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            IssueCategoryId = 3,
+                            CategoryName = "Part Damaged in Ops",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            IssueCategoryId = 4,
+                            CategoryName = "Parts Purchased Incorrectly",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            IssueCategoryId = 5,
+                            CategoryName = "Parts Not Purchased In Time",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            IssueCategoryId = 6,
+                            CategoryName = "Need Job Moved Up for Production",
+                            Notes = ""
                         });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.LaborCode", b =>
+                {
+                    b.Property<int>("LaborCodeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LaborCodeId"));
+
+                    b.Property<string>("LaborCodeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LaborCodeId");
+
+                    b.ToTable("LaborCodes");
+
+                    b.HasData(
+                        new
+                        {
+                            LaborCodeId = 1,
+                            LaborCodeName = "001",
+                            Notes = "Std Engineering Work on Project"
+                        },
+                        new
+                        {
+                            LaborCodeId = 2,
+                            LaborCodeName = "050",
+                            Notes = "First Time Test"
+                        },
+                        new
+                        {
+                            LaborCodeId = 3,
+                            LaborCodeName = "310",
+                            Notes = "Engineering Rework due to Vendor Error"
+                        },
+                        new
+                        {
+                            LaborCodeId = 4,
+                            LaborCodeName = "410",
+                            Notes = "Engineering Rework due to Eng Error"
+                        },
+                        new
+                        {
+                            LaborCodeId = 5,
+                            LaborCodeName = "460",
+                            Notes = "Engineering Rework due to Customer Change"
+                        },
+                        new
+                        {
+                            LaborCodeId = 6,
+                            LaborCodeName = "500",
+                            Notes = "Engineering Sales Support"
+                        },
+                        new
+                        {
+                            LaborCodeId = 7,
+                            LaborCodeName = "550",
+                            Notes = "PTO"
+                        },
+                        new
+                        {
+                            LaborCodeId = 8,
+                            LaborCodeName = "Overhead / Not Chargeable",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LaborCodeId = 9,
+                            LaborCodeName = "Manuals",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LaborCodeId = 10,
+                            LaborCodeName = "Redlines",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LaborCodeId = 11,
+                            LaborCodeName = "Quotes",
+                            Notes = ""
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.LogStatus", b =>
+                {
+                    b.Property<int>("LogStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LogStatusId"));
+
+                    b.Property<string>("LogStatusName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LogStatusId");
+
+                    b.ToTable("LogStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            LogStatusId = 1,
+                            LogStatusName = "A. Project Queue",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 2,
+                            LogStatusName = "B. Quote Feasibility Review",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 3,
+                            LogStatusName = "C. Preparing Quote",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 4,
+                            LogStatusName = "D. Review Quote w/ Paul",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 5,
+                            LogStatusName = "E. Sent Quote to Customer / Awaiting Decision",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 6,
+                            LogStatusName = "F. Order Received / Eng Kick Off",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 7,
+                            LogStatusName = "G. Managerial Approval for Quotes above $50K",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 8,
+                            LogStatusName = "H. Engineering Design",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 9,
+                            LogStatusName = "I. Design Sent to Customer for Approval",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 10,
+                            LogStatusName = "J. Approved / Ready for Shop Release",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 11,
+                            LogStatusName = "K. Shop Released / Waiting for Parts",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 12,
+                            LogStatusName = "L. All Parts in Stock / Waiting to go to Assy",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 13,
+                            LogStatusName = "M. Assembly & Test",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 14,
+                            LogStatusName = "N. Shipping",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 15,
+                            LogStatusName = "O. Documentation / Manual Done",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 16,
+                            LogStatusName = "P. Completed Projects / Product Delivered",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 17,
+                            LogStatusName = "Q. No Quote / Quote Archived",
+                            Notes = ""
+                        },
+                        new
+                        {
+                            LogStatusId = 18,
+                            LogStatusName = "R. On Hold",
+                            Notes = ""
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.MfgLocation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("MfgLocationName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MfgLocations");
                 });
 
             modelBuilder.Entity("flodraulicproject.Models.OrderDetail", b =>
@@ -461,6 +1904,9 @@ namespace flodraulicproject.DataAccess.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
+                    b.Property<int>("FloLocationId")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderHeaderId")
                         .HasColumnType("int");
 
@@ -471,6 +1917,8 @@ namespace flodraulicproject.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FloLocationId");
 
                     b.HasIndex("OrderHeaderId");
 
@@ -498,15 +1946,18 @@ namespace flodraulicproject.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("LeadTime")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ListOrderTotal")
+                        .HasColumnType("float");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("OrderStatus")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("OrderTotal")
                         .HasColumnType("float");
@@ -531,15 +1982,21 @@ namespace flodraulicproject.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PurchaseOrderNo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SessionId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ShippingDate")
+                    b.Property<DateTime?>("ShippingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
 
                     b.Property<string>("StreetAddress")
                         .IsRequired()
@@ -551,6 +2008,8 @@ namespace flodraulicproject.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("StatusId");
 
                     b.ToTable("OrderHeaders");
                 });
@@ -605,9 +2064,14 @@ namespace flodraulicproject.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("DiscountPrice")
+                        .HasColumnType("float");
+
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("LeadTime")
+                        .HasColumnType("int");
 
                     b.Property<double>("ListPrice")
                         .HasColumnType("float");
@@ -619,7 +2083,7 @@ namespace flodraulicproject.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Qoh")
+                    b.Property<int?>("Qoh")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -636,7 +2100,9 @@ namespace flodraulicproject.DataAccess.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Description = "Pump",
+                            DiscountPrice = 0.0,
                             ImageUrl = "",
+                            LeadTime = 14,
                             ListPrice = 99.0,
                             PartFamilyId = 1,
                             PartNumber = "2000-3900",
@@ -647,7 +2113,9 @@ namespace flodraulicproject.DataAccess.Migrations
                             Id = 2,
                             CategoryId = 1,
                             Description = "Pump",
+                            DiscountPrice = 0.0,
                             ImageUrl = "",
+                            LeadTime = 14,
                             ListPrice = 40.0,
                             PartFamilyId = 1,
                             PartNumber = "219-2370",
@@ -658,7 +2126,9 @@ namespace flodraulicproject.DataAccess.Migrations
                             Id = 3,
                             CategoryId = 2,
                             Description = "Valve",
+                            DiscountPrice = 0.0,
                             ImageUrl = "",
+                            LeadTime = 14,
                             ListPrice = 55.0,
                             PartFamilyId = 2,
                             PartNumber = "031-6450",
@@ -669,11 +2139,119 @@ namespace flodraulicproject.DataAccess.Migrations
                             Id = 4,
                             CategoryId = 3,
                             Description = "Filter",
+                            DiscountPrice = 0.0,
                             ImageUrl = "",
+                            LeadTime = 14,
                             ListPrice = 70.0,
                             PartFamilyId = 1,
                             PartNumber = "222-6780",
                             Qoh = 3
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.SalesLocation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SalesLocationName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SalesLocations");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.ServiceManual", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ManualName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ManualType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ServiceManuals");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.ShippedQty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FloLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LocationName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderNoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PartNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QtyShipped")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ShipDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FloLocationId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ShippedQtys");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FloLocationId = 1,
+                            OrderNoId = 1021,
+                            ProductId = 1,
+                            QtyShipped = 10
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FloLocationId = 2,
+                            OrderNoId = 1022,
+                            ProductId = 2,
+                            QtyShipped = 20
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FloLocationId = 3,
+                            OrderNoId = 1023,
+                            ProductId = 3,
+                            QtyShipped = 10
                         });
                 });
 
@@ -692,6 +2270,9 @@ namespace flodraulicproject.DataAccess.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
+                    b.Property<int>("FloLocationId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -699,9 +2280,314 @@ namespace flodraulicproject.DataAccess.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
+                    b.HasIndex("FloLocationId");
+
                     b.HasIndex("ProductId");
 
                     b.ToTable("ShoppingCarts");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.Status", b =>
+                {
+                    b.Property<int>("StatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StatusId"));
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StatusId");
+
+                    b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            StatusId = 1,
+                            Notes = "",
+                            StatusName = "NewOrder"
+                        },
+                        new
+                        {
+                            StatusId = 2,
+                            Notes = "",
+                            StatusName = "P21Entered"
+                        },
+                        new
+                        {
+                            StatusId = 3,
+                            Notes = "",
+                            StatusName = "Shipped/Invoiced"
+                        },
+                        new
+                        {
+                            StatusId = 4,
+                            Notes = "",
+                            StatusName = "Paid"
+                        },
+                        new
+                        {
+                            StatusId = 5,
+                            Notes = "",
+                            StatusName = "Canceled"
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.Supplier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SupplierName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SupplierNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SupplierType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Website")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Suppliers");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.SupplierContact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Cell")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OfficeLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SupplierContacts");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.Ticket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Issue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TicketStatusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("TicketStatusId");
+
+                    b.ToTable("Tickets");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.TicketStatus", b =>
+                {
+                    b.Property<int>("TicketStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketStatusId"));
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TicketStatusId");
+
+                    b.ToTable("TicketStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            TicketStatusId = 1,
+                            Notes = "",
+                            StatusName = "New"
+                        },
+                        new
+                        {
+                            TicketStatusId = 2,
+                            Notes = "",
+                            StatusName = "In Process"
+                        },
+                        new
+                        {
+                            TicketStatusId = 3,
+                            Notes = "",
+                            StatusName = "Complete"
+                        });
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.TimeTracker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("ClosedEarly")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateWorkPerformed")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EngineerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FloLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("HrsWorked")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("JobNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LaborCodeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("P21Entered")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EngineerId");
+
+                    b.HasIndex("FloLocationId");
+
+                    b.HasIndex("LaborCodeId");
+
+                    b.ToTable("TimeTrackers");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.WorkInstruction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WIName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WIType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorkInstructions");
                 });
 
             modelBuilder.Entity("flodraulicproject.Models.ApplicationUser", b =>
@@ -788,8 +2674,218 @@ namespace flodraulicproject.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("flodraulicproject.Models.EcnLog", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.EcnLogStatus", "EcnLogStatus")
+                        .WithMany()
+                        .HasForeignKey("EcnLogStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.EngineeringLog", "EngineeringLog")
+                        .WithMany()
+                        .HasForeignKey("EngineeringLogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EcnLogStatus");
+
+                    b.Navigation("EngineeringLog");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EcnLogComment", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.EcnLog", "EcnLog")
+                        .WithMany()
+                        .HasForeignKey("EcnLogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EcnLog");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EcnLogImage", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.EcnLog", "EcnLog")
+                        .WithMany("EcnLogImages")
+                        .HasForeignKey("EcnLogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EcnLog");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EngLogComment", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.EngineeringLog", "EngineeringLog")
+                        .WithMany("EngLogComments")
+                        .HasForeignKey("EngineeringLogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EngineeringLog");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EngineeringLog", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.Engineer", "Engineer")
+                        .WithMany()
+                        .HasForeignKey("EngineerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.Estimator", "Estimator")
+                        .WithMany()
+                        .HasForeignKey("EstimatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.LogStatus", "LogStatus")
+                        .WithMany()
+                        .HasForeignKey("LogStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.MfgLocation", "MfgLocation")
+                        .WithMany()
+                        .HasForeignKey("MfgLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.SalesLocation", "SalesLocation")
+                        .WithMany()
+                        .HasForeignKey("SalesLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Engineer");
+
+                    b.Navigation("Estimator");
+
+                    b.Navigation("LogStatus");
+
+                    b.Navigation("MfgLocation");
+
+                    b.Navigation("SalesLocation");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EngineeringLogImage", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.EngineeringLog", "EngineeringLog")
+                        .WithMany("EngineeringLogImages")
+                        .HasForeignKey("EngineeringLogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EngineeringLog");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.FloContact", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.FloLocation", "FloLocation")
+                        .WithMany()
+                        .HasForeignKey("FloLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FloLocation");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.Hotlist", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.Engineer", "Engineer")
+                        .WithMany()
+                        .HasForeignKey("EngineerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.HotlistResp", "HotlistResp")
+                        .WithMany()
+                        .HasForeignKey("HotlistRespId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.HotlistStatus", "HotlistStatus")
+                        .WithMany()
+                        .HasForeignKey("HotlistStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.IssueCategory", "IssueCategory")
+                        .WithMany()
+                        .HasForeignKey("IssueCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Engineer");
+
+                    b.Navigation("HotlistResp");
+
+                    b.Navigation("HotlistStatus");
+
+                    b.Navigation("IssueCategory");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.HotlistComment", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.Hotlist", "Hotlist")
+                        .WithMany("HotlistComments")
+                        .HasForeignKey("HotlistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hotlist");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.HotlistImage", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.Hotlist", "Hotlist")
+                        .WithMany("HotlistImages")
+                        .HasForeignKey("HotlistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hotlist");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.InitialQuoteReview", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.EngineeringLog", "EngineeringLog")
+                        .WithMany()
+                        .HasForeignKey("EngineeringLogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EngineeringLog");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.Inventory", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.FloLocation", "FloLocation")
+                        .WithMany()
+                        .HasForeignKey("FloLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FloLocation");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("flodraulicproject.Models.OrderDetail", b =>
                 {
+                    b.HasOne("flodraulicproject.Models.FloLocation", "FloLocation")
+                        .WithMany()
+                        .HasForeignKey("FloLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("flodraulicproject.Models.OrderHeader", "OrderHeader")
                         .WithMany()
                         .HasForeignKey("OrderHeaderId")
@@ -801,6 +2897,8 @@ namespace flodraulicproject.DataAccess.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("FloLocation");
 
                     b.Navigation("OrderHeader");
 
@@ -815,7 +2913,15 @@ namespace flodraulicproject.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("flodraulicproject.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("flodraulicproject.Models.Product", b =>
@@ -837,11 +2943,36 @@ namespace flodraulicproject.DataAccess.Migrations
                     b.Navigation("PartFamily");
                 });
 
+            modelBuilder.Entity("flodraulicproject.Models.ShippedQty", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.FloLocation", "FloLocation")
+                        .WithMany()
+                        .HasForeignKey("FloLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FloLocation");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("flodraulicproject.Models.ShoppingCart", b =>
                 {
                     b.HasOne("flodraulicproject.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.FloLocation", "FloLocation")
+                        .WithMany()
+                        .HasForeignKey("FloLocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -853,7 +2984,55 @@ namespace flodraulicproject.DataAccess.Migrations
 
                     b.Navigation("ApplicationUser");
 
+                    b.Navigation("FloLocation");
+
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.Ticket", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.TicketStatus", "TicketStatus")
+                        .WithMany()
+                        .HasForeignKey("TicketStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("TicketStatus");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.TimeTracker", b =>
+                {
+                    b.HasOne("flodraulicproject.Models.Engineer", "Engineer")
+                        .WithMany()
+                        .HasForeignKey("EngineerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.FloLocation", "FloLocation")
+                        .WithMany()
+                        .HasForeignKey("FloLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("flodraulicproject.Models.LaborCode", "LaborCode")
+                        .WithMany()
+                        .HasForeignKey("LaborCodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Engineer");
+
+                    b.Navigation("FloLocation");
+
+                    b.Navigation("LaborCode");
                 });
 
             modelBuilder.Entity("flodraulicproject.Models.ApplicationUser", b =>
@@ -869,6 +3048,25 @@ namespace flodraulicproject.DataAccess.Migrations
                     b.Navigation("Company");
 
                     b.Navigation("CustomerLocation");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EcnLog", b =>
+                {
+                    b.Navigation("EcnLogImages");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.EngineeringLog", b =>
+                {
+                    b.Navigation("EngLogComments");
+
+                    b.Navigation("EngineeringLogImages");
+                });
+
+            modelBuilder.Entity("flodraulicproject.Models.Hotlist", b =>
+                {
+                    b.Navigation("HotlistComments");
+
+                    b.Navigation("HotlistImages");
                 });
 #pragma warning restore 612, 618
         }

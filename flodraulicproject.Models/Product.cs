@@ -19,10 +19,12 @@ namespace flodraulicproject.Models
         public string Description { get; set; }
 
         [Display(Name = "List Price")]
-        [Range(1,1000)]
         public double ListPrice { get; set; }
 
-        public int Qoh { get; set; }
+        [Display(Name = "Discount Price")]
+        public double DiscountPrice { get; set; }
+
+        public int? Qoh { get; set; }
 
         public int CategoryId { get; set; }
 
@@ -37,7 +39,8 @@ namespace flodraulicproject.Models
         public PartFamily PartFamily { get; set; }
 
         [ValidateNever]
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
+        public int? LeadTime { get; set; }
 
     }
 }

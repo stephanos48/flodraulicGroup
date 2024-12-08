@@ -1,0 +1,119 @@
+﻿@model List<Supplier>
+
+    <div class="card shadow border-0 my-4">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="col-6">
+                <div class="row">
+                    <h2 class="text-primary">Suppliers</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-4">
+            <div class="row pb-2">
+                <div class="col-6">
+                </div>
+                <div class="col-6 text-end">
+                <a asp-controller="Supplier" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create New Supplier
+                </a>
+                </div>
+            </div>
+            <table id="tblData" class="table table-bordered table-striped" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Supplier Name
+                        </th>
+                        <th>
+                            Supplier Type
+                        </th>
+                        <th>
+                            City
+                        </th>
+                        <th>
+                            State
+                        </th>
+                        <th>
+                            Country
+                        </th>
+                        <th>
+                            Website
+                        </th>
+                        <th>
+                            Notes
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PfepId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.PfepId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PfepId })
+                    </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SupplierName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SupplierType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.State)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Website)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Notes)
+                        </td>
+                        @*<td>@Html.ActionLink("Update", "Details", new { orderId = item.Id })</td>*@
+                        <td>
+                            <a asp-controller="Supplier" asp-action="Details" asp-route-orderId="@item.Id" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i> Details
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+    </div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#tblData").DataTable({
+                'iDisplayLength': 200
+            });
+        });
+
+    </script>
+
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script type="text/javascript">
+        $('#btn').click(function () {
+            $('.table').table2excel({
+                name: "download",
+                filename: "download",
+                fileext: ".xlsx"
+            });
+        });
+    </script>
+}

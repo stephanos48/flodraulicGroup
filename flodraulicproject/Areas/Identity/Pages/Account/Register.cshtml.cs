@@ -120,9 +120,14 @@ namespace flodraulicproject.Areas.Identity.Pages.Account
             public string? State { get; set; }
             public string? PostalCode { get; set; }
             public string? PhoneNumber { get; set; }
+
             public int? CompanyId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyList { get; set; }
+
+            public int? CustomerLocationId { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CustomerLocationList { get; set; }
 
         }
 
@@ -148,7 +153,13 @@ namespace flodraulicproject.Areas.Identity.Pages.Account
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()
+                }),
+                CustomerLocationList = _unitOfWork.CustomerLocation.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.LocationName,
+                    Value = i.CustomerLocationId.ToString()
                 })
+
             };
 
             ReturnUrl = returnUrl;
@@ -171,6 +182,7 @@ namespace flodraulicproject.Areas.Identity.Pages.Account
                 user.State = Input.State;
                 user.PostalCode = Input.PostalCode;
                 user.PhoneNumber = Input.PhoneNumber;
+                user.CustomerLocationId = Input.CustomerLocationId;
 
                 if (Input.Role == SD.Role_Company)
                 {

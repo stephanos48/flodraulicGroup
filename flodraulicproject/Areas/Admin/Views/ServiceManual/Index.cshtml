@@ -1,0 +1,44 @@
+﻿@model List<ServiceManual>
+
+    <div class="card shadow border-0 my-4">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="col-6">
+                <div class="row">
+                    <h2 class="text-primary">Service Manuals</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="row pb-3">
+                <div class="col-6">
+                </div>
+                <div class="col-6 text-end">
+                    <a asp-controller="ServiceManual" asp-action="Upsert" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Create New Service Manual
+                    </a>
+                </div>
+            </div>
+    
+        <table id="tblData" class="table table-bordered table-striped" width="100%">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Manual Name
+                    </th>
+                    <th>
+                        Manual Type
+                    </th>
+                    <th>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+        </div>
+    </div>
+@section Scripts {
+    <script src="~/js/servicemanual.js"> </script>
+}

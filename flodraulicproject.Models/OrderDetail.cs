@@ -25,6 +25,12 @@ namespace flodraulicproject.Models
         [ValidateNever]
         public Product Product { get; set; }
 
+        [Required]
+        public int FloLocationId { get; set; }
+        [ForeignKey("FloLocationId")]
+        [ValidateNever]
+        public FloLocation FloLocation { get; set; }
+
         public int Count { get; set; }
         public double Price { get; set; }
 

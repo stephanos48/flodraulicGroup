@@ -2,20 +2,20 @@ var dataTable;
 
 $(document).ready(function () {
     var url = window.location.search;
-    if (url.includes("inprocess")) {
-        loadDataTable("inprocess");
+    if (url.includes("neworder")) {
+        loadDataTable("neworder");
     }
     else {
-        if (url.includes("completed")) {
-            loadDataTable("completed");
+        if (url.includes("p21entered")) {
+            loadDataTable("p21entered");
         }
         else {
-            if (url.includes("pending")) {
-                loadDataTable("pending");
+            if (url.includes("shippedinvoiced")) {
+                loadDataTable("shippedinvoiced");
             }
             else {
-                if (url.includes("approved")) {
-                    loadDataTable("approved");
+                if (url.includes("paid")) {
+                    loadDataTable("paid");
                 }
                 else {
                     loadDataTable("all");
@@ -28,13 +28,14 @@ $(document).ready(function () {
 
 function loadDataTable(status) {
     dataTable = $('#tblData').DataTable({
-        "ajax": { url:'/admin/order/getall?status=' + status },
+        //"ajax": { url:'/admin/order/getall?status=' + status },
+        "ajax": { url:'/admin/order/orderlist?status=' + status},
         "columns": [
             { data: 'id', "width": "5%" },
             { data: 'name', "width": "25%" },
             { data: 'phoneNumber', "width": "20%" },
             { data: 'applicationUser.email', "width": "20%" },
-            { data: 'orderStatus', "width": "10%" },
+            { data: 'status.statusName', "width": "10%" },
             { data: 'orderTotal', "width": "10%" },
             {
                 data: 'id',

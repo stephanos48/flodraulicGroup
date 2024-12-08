@@ -1,0 +1,119 @@
+﻿@model List<EngLogVM1>;
+
+<div class="row">
+    <div class="col-12 col-md-2">
+        <a asp-area="Admin" asp-controller="Engineering" asp-action="TimeTrackerReports" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+            <small>Back</small>
+        </a>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="row">
+        <h2>Quote Dashboard</h2>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            QuoteNo
+                        </th>
+                        <th>
+                            Estimator
+                        </th>
+                        <th>
+                            Customer
+                        </th>
+                        @*<th>
+                            SysDesc
+                        </th>*@
+                        <th>
+                            QRR
+                        </th>
+                        <th>
+                            TQD
+                        </th>
+                        <th>
+                            IQRT
+                        </th>
+                        <th>
+                            IQR
+                        </th>
+                        <th>
+                            FQRT
+                        </th>
+                        <th>
+                            FQR
+                        </th>
+                        <th>
+                            QuoteDate
+                        </th>
+                        @*<th>
+                            OrderReceived
+                        </th>
+                        <th>
+                            ContractReviewTarget
+                        </th>
+                        <th>
+                            ContractReview
+                        </th>
+                        <th>
+                            OrderEntryTarget
+                        </th>
+                        <th>
+                            OrderEntry
+                        </th>*@
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.QuoteNo)</td>
+                            <td>@Html.DisplayFor(modelItem => item.EstimatorName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Customer)</td>
+                            @*<td>@Html.DisplayFor(modelItem => item.SystemDescription)</td>*@
+                            <td>@Html.DisplayFor(modelItem => item.QuoteReceivedDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.QuoteTargetDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.InitialQuoteReviewTargetDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.InitialQuoteReviewDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FinalQuoteReviewTargetDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FinalQuoteReviewDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.QuoteDate)</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#shipplan").DataTable({
+                'iDisplayLength': 200
+            });
+        });
+
+    </script>
+
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script type="text/javascript">
+        $('#btn').click(function () {
+            $('.table').table2excel({
+                name: "download",
+                filename: "download",
+                fileext: ".xlsx"
+            });
+        });
+    </script>
+}

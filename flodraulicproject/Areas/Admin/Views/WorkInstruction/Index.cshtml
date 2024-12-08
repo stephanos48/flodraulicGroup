@@ -1,0 +1,44 @@
+﻿@model List<WorkInstruction>
+
+    <div class="card shadow border-0 my-4">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="col-6">
+                <div class="row">
+                    <h2 class="text-primary">Work Instructions</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="row pb-3">
+                <div class="col-6">
+                </div>
+                <div class="col-6 text-end">
+                    <a asp-controller="WorkInstruction" asp-action="Upsert" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Create New Work Instruction
+                    </a>
+                </div>
+            </div>
+    
+        <table id="tblData" class="table table-bordered table-striped" width="100%">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        WI Name
+                    </th>
+                    <th>
+                        WI Type
+                    </th>
+                    <th>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+        </div>
+    </div>
+@section Scripts{
+    <script src="~/js/workinstruction.js"></script>
+}

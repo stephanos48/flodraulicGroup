@@ -4,6 +4,7 @@
     var status = Context.Request.Query["status"];
     var tractor = "text-primary";
     var trailer = "text-primary";
+    var misc = "text-primary";
     var all = "text-primary";
 
     switch (status)
@@ -14,11 +15,23 @@
         case "trailer":
             trailer = "active text-white bg-primary";
             break;
+        case "misc":
+            misc = "active text-white bg-primary";
+            break;
+
         default:
             all = "active text-white bg-primary";
             break;
     }
 }
+
+<div class="row">
+    <div class="col-6 col-md-2">
+        <a asp-controller="Home" asp-action="LandingPageCryo" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+            <small>Back</small>
+        </a>
+    </div>
+</div>
 
 <div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
@@ -32,13 +45,16 @@
         <span></span>
         <ul class="list-group list-group-horizontal-sm">
             <a style="text-decoration:none;" asp-controller="Home" asp-action="PumpsList" asp-route-status="tractor">
-            <li class="list-group-item @tractor">Tractor</li>
+                <li class="list-group-item @tractor">Tractor</li>
             </a>
             <a style="text-decoration:none;" asp-controller="Home" asp-action="PumpsList" asp-route-status="trailer">
-            <li class="list-group-item @trailer">Trailer</li>
+                <li class="list-group-item @trailer">Trailer</li>
+            </a>
+            <a style="text-decoration:none;" asp-controller="Home" asp-action="PumpsList" asp-route-status="misc">
+                <li class="list-group-item @misc">Misc</li>
             </a>
             <a style="text-decoration:none;" asp-controller="Home" asp-action="PumpsList" asp-route-status="all">
-            <li class="list-group-item @all">All</li>
+                <li class="list-group-item @all">All</li>
             </a>
         </ul>
     </div>
@@ -57,16 +73,19 @@
             <thead>
                 <tr>
                     <th>
+                        Image
+                    </th>
+                    <th>
                         PN
                     </th>
                     <th>
                         Description
                     </th>
                     <th>
-                        Price
+                        List Price
                     </th>
                     <th>
-                        Qoh
+                        Discount Price
                     </th>
                     <th>
                         Family

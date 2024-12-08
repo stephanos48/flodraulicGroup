@@ -16,11 +16,32 @@ namespace flodraulicproject.Models
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
-        public DateTime ShippingDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Shipping Date")]
+        public DateTime? ShippingDate { get; set; }
+
         public double OrderTotal { get; set; }
 
-        public string? OrderStatus { get; set; }
+        public double ListOrderTotal { get; set; }
+        
+        public int? LeadTime { get; set; }
+        
+        public string? PurchaseOrderNo { get; set; }
+        
+        [Required]
+        public int StatusId { get; set; }
+        
+        [ForeignKey("StatusId")]
+        [ValidateNever]
+        public Status Status { get; set; }
+
         public string? PaymentStatus { get; set; }
         public string? TrackingNumber { get; set; }
         public string? Carrier { get; set; }

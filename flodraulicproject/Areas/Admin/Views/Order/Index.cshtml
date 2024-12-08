@@ -1,30 +1,40 @@
-﻿@{
+﻿@model List<OrderHeader>
+
+@{
     var status = Context.Request.Query["status"];
-    var pending = "text-primary";
-    var inprocess = "text-primary";
-    var completed = "text-primary";
-    var approved = "text-primary";
+    var neworder = "text-primary";
+    var p21entered = "text-primary";
+    var shippedinvoiced = "text-primary";
+    var paid = "text-primary";
     var all = "text-primary";
 
     switch (status)
     {
-        case "pending":
-            pending = "active text-white bg-primary";
+        case "neworder":
+            neworder = "active text-white bg-primary";
             break;
-        case "inprocess":
-            inprocess = "active text-white bg-primary";
+        case "p21entered":
+            p21entered = "active text-white bg-primary";
             break;
-        case "completed":
-            completed = "active text-white bg-primary";
+        case "shippedinvoiced":
+            shippedinvoiced = "active text-white bg-primary";
             break;
-        case "approved":
-            approved = "active text-white bg-primary";
+        case "paid":
+            paid = "active text-white bg-primary";
             break;
         default:
             all = "active text-white bg-primary";
             break;
     }
 }
+
+<div class="row">
+    <div class="col-6 col-md-2">
+        <a asp-area="Customer" asp-controller="Home" asp-action="LandingPage" class="btn btn-outline-primary bg-gradient mb-3 fw-semibold btn-sm text-uppercase">
+            <small>Back</small>
+        </a>
+    </div>
+</div>
 
 <div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
@@ -34,26 +44,35 @@
             </div>
         </div>
     </div>
+    <div class="d-flex justify-content-between pb-5 pt-2">
+        <span></span>
+        <ul class="list-group list-group-horizontal-sm">
+            <a style="text-decoration:none;" asp-controller="Order" asp-action="OrderList" asp-route-status="neworder">
+            <li class="list-group-item @neworder">NewOrder</li>
+            </a>
+            <a style="text-decoration:none;" asp-controller="Order" asp-action="OrderList" asp-route-status="p21entered">
+            <li class="list-group-item @p21entered">P21Entered</li>
+            </a>
+            <a style="text-decoration:none;" asp-controller="Order" asp-action="OrderList" asp-route-status="shippedinvoiced">
+            <li class="list-group-item @shippedinvoiced">Shipped/Invoiced</li>
+            </a>
+            <a style="text-decoration:none;" asp-controller="Order" asp-action="OrderList" asp-route-status="paid">
+            <li class="list-group-item @paid">Paid</li>
+            </a>
+            <a style="text-decoration:none;" asp-controller="Order" asp-action="OrderList" asp-route-status="all">
+            <li class="list-group-item @all">All</li>
+            </a>
+        </ul>
+    </div>
     <div class="card-body p-4">
-        <div class="d-flex justify-content-between pb-5 pt-2">
-            <span></span>
-            <ul class="list-group list-group-horizontal-sm">
-                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="inprocess">
-                    <li class="list-group-item @inprocess">In Process</li>
-                </a>
-                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="pending">
-                <li class="list-group-item @pending">Payment Pending</li>
-                </a>
-                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="completed">
-                <li class="list-group-item @completed">Completed</li>
-                </a>
-                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="approved">
-                <li class="list-group-item @approved">Approved</li>
-                </a>
-                <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="all">
-                <li class="list-group-item @all">All</li>
-                </a>
-            </ul>
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            @*<div class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Create New Product
+            </a>
+            </div>*@
         </div>
         <table id="tblData" class="table table-bordered table-striped" width="100%">
             <thead>
@@ -82,6 +101,7 @@
         </table>
     </div>
 </div>
-    @section Scripts {
-        <script src="~/js/order.js"></script>
-    }
+
+@section Scripts {
+    <script src="~/js/order.js"></script>
+}

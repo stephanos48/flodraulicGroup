@@ -1,0 +1,200 @@
+﻿@model List<EngLogVM1>;
+
+<div class="row">
+    <div class="col-6 col-md-2">
+        <a asp-area="Customer" asp-controller="Home" asp-action="Engineering" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+            <small>Back</small>
+        </a>
+    </div>
+</div>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="col-6">
+            <div class="row">
+                <h2 class="text-primary">Engineering Log</h2>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <p>
+            @Html.ActionLink("All", "Index") | @Html.ActionLink("QuoteLog", "QuoteLog") | @Html.ActionLink("AwaitingDecision", "AwaitingDecision") | @Html.ActionLink("Design", "EngLog") | @Html.ActionLink("Assembly", "Assembly") | @Html.ActionLink("Completed", "CompletedProjects") | @Html.ActionLink("No Quote / Archive", "NoQuoteArchiveProjects") | @Html.ActionLink("On Hold", "ProjectsOnHold")
+        </p>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-4">
+                <button id="btn" class="btn btn-success">Export to Excel</button>
+            </div>
+            <div class="col-4">
+            </div>
+            <div class="col-4 text-end">
+                <a asp-controller="EngineeringLog" asp-action="Upsert" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Create New Log Entry
+                </a>
+            </div>
+            @*<div class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Create New Product
+            </a>
+            </div>*@
+        </div>
+        <table id="tblData" class="table table-bordered table-striped" width="100%">
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        QuoteNo
+                    </th>
+                    <th>
+                        JobNo
+                    </th>
+                    <th>
+                        Customer
+                    </th>
+                    <th>
+                        MfgLocation
+                    </th>
+                    <th>
+                        Estimator
+                    </th>
+                    <th>
+                        Engineer
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Quoted Eng Hrs
+                    </th>
+                    <th>
+                        Actual Eng Hrs
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Edit", "Upsert", new { id = item.Id }) |
+                            @Html.ActionLink("Comments", "EngLogComment", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Milestones", "MilestoneMap", new { id = item.Id }) 
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.QuoteNo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.JobNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Customer)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MfgLocationName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EstimatorName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EngineerName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.LogStatusName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.QuotedEngHrs)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ActualEngHrs)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*
+
+<div class="row">
+
+    <h2>Savings Report</h2>
+    <div class="span" style="border: 1px solid black">
+        <form id="reportForm" class="form-inline">
+            <div class="row">
+                <div class="col-md-4">
+                    <br />
+
+                </div>
+
+                <div class="col-md-4">
+                    <label for="fromDate">From Date</label><br />
+                    <div class="form-group">
+                        <input type="datetime" class="form-control" id="fromDate">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="toDate">To Date</label><br />
+                    <div class="form-group">
+                        <input type="datetime" class="form-control" id="toDate">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4">
+                    <button id="btnSearch" onclick="report()" class="btn btn-default col-md-4">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<div class="row">
+    <h2>Search Results</h2>
+    <div class="searchResults">
+
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Order Date
+                    </th>
+                    <th>
+                        Purchase Order No
+                    </th>
+                    <th>
+                        User
+                    </th>
+                    <th>
+                        List Order Total
+                    </th>
+                    <th>
+                        Discount Order Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="searchResults">
+            </tbody>
+        </table>
+
+    </div>
+</div>
+*@
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#tblData").DataTable({
+                'iDisplayLength': 200
+            });
+        });
+
+    </script>
+
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script type="text/javascript">
+        $('#btn').click(function () {
+            $('.table').table2excel({
+                name: "download",
+                filename: "download",
+                fileext: ".xlsx"
+            });
+        });
+    </script>
+}

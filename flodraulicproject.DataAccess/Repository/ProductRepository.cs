@@ -25,7 +25,9 @@ namespace flodraulicproject.DataAccess.Repository
             {
                 objFromDb.PartNumber = obj.PartNumber;
                 objFromDb.ListPrice = obj.ListPrice;
+                objFromDb.DiscountPrice = obj.DiscountPrice;
                 objFromDb.Qoh = obj.Qoh;
+                objFromDb.LeadTime = obj.LeadTime;
                 objFromDb.Description = obj.Description;
                 objFromDb.CategoryId = obj.CategoryId;
                 objFromDb.PartFamilyId = obj.PartFamilyId;

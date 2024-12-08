@@ -1,0 +1,138 @@
+﻿@model EngTimeOverviewVM
+
+<div class="row">
+    <div class="col-12 col-md-2">
+        <a asp-area="Admin" asp-controller="Engineering" asp-action="TimeTrackerReports" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+            <small>Back</small>
+        </a>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="row">
+        <h2>Engineering Efficiency Report</h2>
+    </div>
+    <br />
+    <table class="table table-bordered" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    
+                </th>
+                <th>
+                    Paul Brown
+                </th>
+                <th>
+                    Scott Tidwell
+                </th>
+                <th>
+                    Randy Brown
+                </th>
+                <th>
+                    Anthony Bizon
+                </th>
+                <th>
+                    Kyle S.
+                </th>
+                <th>
+                    Phil Kimberlin
+                </th>
+                <th>
+                    Derrick Herr
+                </th>
+                <th>
+                    Darren Zielke
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Total Hrs</td>
+                <td>@Model.pBrownTotal</td>
+                <td>@Model.sTidwellTotal</td>
+                <td>@Model.rBrownTotal</td>
+                <td>@Model.aBizonTotal</td>
+                <td>@Model.kSwindlehurstTotal</td>
+                <td>@Model.pKimberlinTotal</td>
+                <td>@Model.dHerrTotal</td>
+                <td>@Model.dZielkeTotal</td>
+                <td>@Model.totalHrs</td>
+            </tr>
+            <tr>
+                <td>Eng Hrs</td>
+                <td>@Model.pBrownEng</td>
+                <td>@Model.sTidwellEng</td>
+                <td>@Model.rBrownEng</td>
+                <td>@Model.aBizonEng</td>
+                <td>@Model.kSwindlehurstEng</td>
+                <td>@Model.pKimberlinEng</td>
+                <td>@Model.dHerrEng</td>
+                <td>@Model.dZielkeEng</td>
+                <td>@Model.totalEng</td>
+            </tr>
+            <tr>
+                <td>Quote Hrs</td>
+                <td>@Model.pBrownQuote</td>
+                <td>@Model.sTidwellQuote</td>
+                <td>@Model.rBrownQuote</td>
+                <td>@Model.aBizonQuote</td>
+                <td>@Model.kSwindlehurstQuote</td>
+                <td>@Model.pKimberlinQuote</td>
+                <td>@Model.dHerrQuote</td>
+                <td>@Model.dZielkeQuote</td>
+                <td>@Model.totalQuote</td>
+            </tr>
+            <tr>
+                <td>Manual Hrs</td>
+                <td>@Model.pBrownManual</td>
+                <td>@Model.sTidwellManual</td>
+                <td>@Model.rBrownManual</td>
+                <td>@Model.aBizonManual</td>
+                <td>@Model.kSwindlehurstManual</td>
+                <td>@Model.pKimberlinManual</td>
+                <td>@Model.dHerrManual</td>
+                <td>@Model.dZielkeManual</td>
+                <td>@Model.totalManual</td>
+            </tr>
+            <tr>
+                <td>PTO</td>
+                <td>@Model.pBrownPTO</td>
+                <td>@Model.sTidwellPTO</td>
+                <td>@Model.rBrownPTO</td>
+                <td>@Model.aBizonPTO</td>
+                <td>@Model.kSwindlehurstPTO</td>
+                <td>@Model.pKimberlinPTO</td>
+                <td>@Model.dHerrPTO</td>
+                <td>@Model.dZielkePTO</td>
+                <td>@Model.totalPTO</td>
+            </tr>
+            <tr>
+                <td>Non-Value Hrs</td>
+                <td>@Model.pBrownNVH</td>
+                <td>@Model.sTidwellNVH</td>
+                <td>@Model.rBrownNVH</td>
+                <td>@Model.aBizonNVH</td>
+                <td>@Model.kSwindlehurstNVH</td>
+                <td>@Model.pKimberlinNVH</td>
+                <td>@Model.dHerrNVH</td>
+                <td>@Model.dZielkeNVH</td>
+                <td>@Model.totalNVH</td>
+            </tr>
+            <tr>
+                <td>Eff %</td>
+                <td>@Model.pBrownEff</td>
+                <td>@Model.sTidwellEff</td>
+                <td>@Model.rBrownEff</td>
+                <td>@Model.aBizonEff</td>
+                <td>@Model.kSwindlehurstEff</td>
+                <td>@Model.pKimberlinEff</td>
+                <td>@Model.dHerrEff</td>
+                <td>@Model.dZielkeEff</td>
+                <td>@Model.totalEff</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

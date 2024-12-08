@@ -1,65 +1,76 @@
 ﻿<div class="container mt-4">
     <div style="text-align: center">
-        <div class="row">
+        <br />
+        <br />
+        <br />
+        <br>
+        @*<div class="row">
             <br />
             <div class="col-11 text-left">
                 <img src="/Images/flodraulic.jpg" alt="image">
             </div>
+        </div>*@
+        <div class="row">
+            <br />
+            <div class="col-12 text-center">
+                <h2 class="text-danger">Flodraulic Portal</h2>
+            </div>
         </div>
-        <br>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <h3><i class="fa fa-modx"></i></h3>
+                <a asp-controller="Home" asp-action="LandingPageCryo" class="btn">
+                    <i class="bi bi-cpu"></i> Cryo Portal
+                </a>
+            </div>
+            <div class="col-md-3">
+                <h3><i class="fa fa-modx" aria-hidden="true"></i></h3>
+                <a asp-controller="Home" asp-action="SupplyChain" class="btn">
+                    <i class="bi bi-cpu"></i> Supply Chain
+                </a>
+            </div>
+            <div class="col-md-3">
+                <h3><i class="fa fa-modx"></i></h3>
+                <a asp-controller="Home" asp-action="Quality" class="btn ">
+                    <i class="bi bi-cpu"></i> Quality
+                </a>
+            </div>
+            <div class="col-md-3">
+                <h3><i class="fa fa-modx"></i></h3>
+                <a asp-area="Customer" asp-controller="Home" asp-action="Engineering" class="btn ">
+                    <i class="bi bi-cpu"></i> Engineering
+                </a>
+            </div>
+        </div>
         <br>
         <br>
         <div class="row">
             <div class="col-md-3">
                 <h3><i class="fa fa-modx"></i></h3>
-                <a asp-controller="Home" asp-action="PumpsList" class="btn btn-primary">
-                    <i class="bi bi-cpu"></i> Inventory
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
-                <a asp-controller="Home" asp-action="SupplyChain" class="btn">
-                    <i class="bi bi-globe"></i> Supply Chain
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-eye"></i></h3>
-                <a asp-controller="Home" asp-action="Quality" class="btn ">
-                    <i class="bi bi-clipboard-check-fill"></i> Quality
-                </a>
-            </div>
-            <div class="col-md-3">
-                <h3><i class="fa fa-magnet"></i></h3>
-                <a asp-controller="Home" asp-action="Engineering" class="btn ">
-                    <i class="bi bi-pencil"></i> Engineering
-                </a>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="row">
-            <div class="col-md-3">
-                <h3><i class="fa fa-users"></i></h3>
                 <a asp-controller="Home" asp-action="Sales" class="btn ">
-                    <i class="bi bi-people"></i> Sales
+                    <i class="bi bi-cpu"></i> Sales
                 </a>
             </div>
             <div class="col-md-3">
-                <h3><i class="fa fa-code"></i></h3>
-                <a asp-controller="Home" asp-action="IT" class="btn ">
+                <h3><i class="fa fa-modx"></i></h3>
+                <a asp-area="Admin" asp-controller="Ticket" asp-action="Index" class="btn">
+                    <i class="bi bi-cpu"></i> Help Desk
+                </a>
+                @*<a href="/Admin/Ticket/Index" class="btn btn-primary">
                     <i class="bi bi-activity"></i> IT
-                </a>
+                </a>*@
             </div>
             <div class="col-md-3">
-                <h3><i class="fa fa-blind"></i></h3>
+                <h3><i class="fa fa-modx"></i></h3>
                 <a asp-controller="Home" asp-action="Finance" class="btn ">
-                    <i class="bi bi-currency-bitcoin"></i> Finance
+                    <i class="bi bi-cpu"></i> Finance
                 </a>
             </div>
             <div class="col-md-3">
-                <h3><i class="fa fa-android"></i></h3>
+                <h3><i class="fa fa-modx"></i></h3>
                 <a asp-controller="Home" asp-action="AI" class="btn ">
-                    <i class="bi bi-crosshair"></i> AI
+                    <i class="bi bi-cpu"></i> AI
                 </a>
             </div>
         </div>
@@ -67,30 +78,31 @@
         <br>
         <div class="row">
             <div class="col-md-3">
-                <h3><i class="fa fa-id-card"></i></h3>
+                <h3><i class="fa fa-modx"></i></h3>
                 <a asp-controller="Home" asp-action="HR" class="btn ">
-                    <i class="bi bi-person-plus-fill"></i> HR
+                    <i class="bi bi-cpu"></i> HR
                 </a>
             </div>
             <div class="col-md-3">
-                <h3><i class="fa fa-wrench"></i></h3>
+                <h3><i class="fa fa-modx"></i></h3>
                 <a asp-controller="Home" asp-action="Maintenance" class="btn ">
-                    <i class="bi bi-gear"></i> Maintenance
+                    <i class="bi bi-cpu"></i> Maintenance
                 </a>
             </div>
             <div class="col-md-3">
-                <h3><i class="fa fa-medkit"></i></h3>
+                <h3><i class="fa fa-modx"></i></h3>
                 <a asp-controller="Home" asp-action="Safety" class="btn ">
-                    <i class="bi bi-cone"></i> Safety
+                    <i class="bi bi-cpu"></i> Safety
                 </a>
             </div>
             <div class="col-md-3">
-                <h3><i class="fa fa-archive"></i></h3>
+                <h3><i class="fa fa-modx"></i></h3>
                 <a asp-controller="Home" asp-action="Archive" class="btn ">
-                    <i class="bi bi-archive"></i> Archive
+                    <i class="bi bi-cpu"></i> Archive
                 </a>
             </div>
         </div>
+
     </div>
 
 </div>

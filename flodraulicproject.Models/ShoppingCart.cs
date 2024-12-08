@@ -26,9 +26,18 @@ namespace flodraulicproject.Models
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
+        public int FloLocationId { get; set; }
+        [ForeignKey("FloLocationId")]
+        [ValidateNever]
+        public FloLocation FloLocation { get; set; }
 
         [NotMapped]
         public double Price { get; set; }
 
-    }
+        [NotMapped]
+        public double DiscountPrice { get; set; }
+		[NotMapped]
+		public int? LeadTime { get; set; }
+
+	}
 }

@@ -23,7 +23,8 @@ namespace flodraulicproject.DataAccess.Repository
             var objFromDb = _db.Inventories.FirstOrDefault(u => u.Id == obj.Id);
             if (objFromDb != null)
             {
-                objFromDb.PartNumber = objFromDb.PartNumber;
+                objFromDb.ProductId = objFromDb.ProductId;
+                objFromDb.FloLocationId = objFromDb.FloLocationId;
                 objFromDb.StartQoh = obj.StartQoh;
             }
 

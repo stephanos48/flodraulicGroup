@@ -10,30 +10,38 @@ $(document).ready(function () {
             loadDataTable("trailer");
         }
         else {
-              loadDataTable("all");
+            if (url.includes("misc")) {
+                loadDataTable("misc");
+            }
+            else {
+                loadDataTable("all");
+            }
         }
     }
 });
 
 function loadDataTable(status) {
     dataTable = $('#tblData').DataTable({
+        'iDisplayLength': 50, 
         "ajax": { url: '/customer/home/getall?status=' + status},
         "columns": [
+            { data: 'imageUrl', "render": function (data) { return '<img src="' + data + '" class="avatar" width="100" height="50"/>'; }, "width": "15" },
             { data: 'partNumber', "width": "15%" },
-            { data: 'description', "width": "25%" },
-            { data: 'listPrice', "width": "10%" },
-            { data: 'qoh', "width": "10%" },
-            { data: 'partFamily.familyName', "width": "15%" },
+            { data: 'description', "width": "15%" },
+            { data: 'listPrice', "width": "5%" },
+            { data: 'discountPrice', "width": "5%" },
+            { data: 'partFamily.familyName', "width": "10%" },
             
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-100 btn-group" role="group">
-                    <a href='/admin/order/details?orderId=${data}' class="btn btn-primary mx-2"> <i class="bi bi-pencil"></i></a>
+                        <a href='/customer/home/details?productId=${data}' class="btn btn-primary mx-2"> Part Details</a>
                    
                     </div>`
+
                 },
-                "width": "25%"
+                "width": "35%"
             }
         ]
     });

@@ -1,0 +1,152 @@
+﻿@model TimeTrackerVM
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="text-black py-2"> @(Model.TimeTracker.Id!=0?"Update":"Create") Time Entry</h2>
+        </div>
+    </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="TimeTracker.Id" hidden />
+            <div class="row">
+                <div class="col-6">
+                    <div class="border p-3">
+                        @*<div asp-validation-summary="ModelOnly"></div>*@
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="TimeTracker.DateWorkPerformed" class="form-control border-0 shadow" />
+                            <label asp-for="TimeTracker.DateWorkPerformed" class="ms-2"></label>
+                            <span asp-validation-for="TimeTracker.DateWorkPerformed" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="TimeTracker.JobNumber" class="form-control border-0 shadow" />
+                            <label asp-for="TimeTracker.JobNumber" class="ms-2"></label>
+                            <span asp-validation-for="TimeTracker.JobNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <label asp-for="TimeTracker.Engineer" class="ms-2"></label>
+                            <select asp-for="TimeTracker.EngineerId" asp-items="@ViewBag.EngineerList" class="form-select"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <label asp-for="TimeTracker.FloLocation" class="ms-2"></label>
+                            <select asp-for="TimeTracker.FloLocationId" asp-items="@ViewBag.FloLocationList" class="form-select"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="TimeTracker.CustomerName" class="form-control border-0 shadow" />
+                            <label asp-for="TimeTracker.CustomerName" class="ms-2"></label>
+                            <span asp-validation-for="TimeTracker.CustomerName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <label asp-for="TimeTracker.LaborCode" class="ms-2"></label>
+                            <select asp-for="TimeTracker.LaborCodeId" asp-items="@ViewBag.LaborCodeList" class="form-select"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="border p-3">
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="TimeTracker.ProjectName" class="form-control border-0 shadow" />
+                            <label asp-for="TimeTracker.ProjectName" class="ms-2"></label>
+                            <span asp-validation-for="TimeTracker.ProjectName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="TimeTracker.WorkDescription" class="form-control border-0 shadow" />
+                            <label asp-for="TimeTracker.WorkDescription" class="ms-2"></label>
+                            <span asp-validation-for="TimeTracker.WorkDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="TimeTracker.HrsWorked" class="form-control border-0 shadow" />
+                            <label asp-for="TimeTracker.HrsWorked" class="ms-2"></label>
+                            <span asp-validation-for="TimeTracker.HrsWorked" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TimeTracker.P21Entered"></label>
+                            <input asp-for="TimeTracker.P21Entered" type="checkbox" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TimeTracker.ClosedEarly"></label>
+                            <input asp-for="TimeTracker.ClosedEarly" type="checkbox" />
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="TimeTracker.Notes" class="form-control border-0 shadow" />
+                            <label asp-for="TimeTracker.Notes" class="ms-2"></label>
+                            <span asp-validation-for="TimeTracker.Notes" class="text-danger"></span>
+                        </div>
+
+                        @*
+                        <div class="form-floating py-2 col-12">
+                        <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select"></select>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                        <select asp-for="Product.PartFamilyId" asp-items="@Model.PartFamilyList" class="form-select"></select>
+                        </div>
+
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
+                                <option disabled selected>--Select Category--</option>
+                            </select>
+                            <label asp-for="Product.CategoryId" class="ms-2"></label>
+                            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="Product.PartFamilyId" asp-items="@Model.PartFamilyList" class="form-select border-0 shadow">
+                                <option disabled selected>--Select Family--</option>
+                            </select>
+                            <label asp-for="Product.PartFamilyId" class="ms-2"></label>
+                            <span asp-validation-for="Product.PartFamilyId" class="text-danger"></span>
+                        </div>*@
+                        @*<div class="form-floating py-2 col-12">
+                            <input type="file" name="file" class="form-control border-0 shadow" />
+                            <label asp-for="Product.ImageUrl" class="ms-2"></label>
+                        </div>*@
+                        @*<div class="form-floating py-2 col-12">
+                        <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-select border-0 shadow" >
+                        <option disabled selected>--Select Category--</option>
+                        </select>
+                        <label asp-for="CategoryId" class="ms-2"></label>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>*@
+                        @*<div class="form-floating py-2 col-12">
+                        <select asp-for="CategoryId" asp-items="@(ViewData["CategoryList"] as IEnumerable<SelectListItem>)" class="form-select border-0 shadow">
+                        <option disabled selected>--Select Category--</option>
+                        </select>
+                        <label asp-for="CategoryId" class="ms-2"></label>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>*@
+
+                    </div>
+                </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        @if (Model.TimeTracker.Id != 0)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Update</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Create</button>
+                        }
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Engineering" asp-action="TTList" class="btn btn-secondary border form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+
+        </form>
+    </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}

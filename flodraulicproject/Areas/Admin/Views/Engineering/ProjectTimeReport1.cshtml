@@ -1,0 +1,177 @@
+﻿@model List<TimeTrackerVM1>;
+
+<div class="row">
+    <div class="col-6 col-md-2">
+        <a asp-area="Customer" asp-controller="Home" asp-action="Engineering" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+            <small>Back</small>
+        </a>
+    </div>
+</div>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="col-6">
+            <div class="row">
+                <h2 class="text-primary">Project Time Report</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-4">
+                <button id="btn" class="btn btn-success">Export to Excel</button>
+            </div>
+            <div class="col-4">
+
+            </div>
+            @*<div class="col-6 text-end">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Create New Product
+            </a>
+            </div>*@
+        </div>
+        <table id="tblData" class="table table-bordered table-striped" width="100%">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Date Work Performed
+                    </th>
+                    <th>
+                        Job No
+                    </th>
+                    <th>
+                        Customer
+                    </th>
+                    <th>
+                        Location
+                    </th>
+                    <th>
+                        Team Member
+                    </th>
+                    <th>
+                        Labor Code
+                    </th>
+                    <th>
+                        Work Description
+                    </th>
+                    <th>
+                        Hrs Worked
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DateWorkPerformed)</td>
+                        <td>@Html.DisplayFor(modelItem => item.JobNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.LocationName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.LaborCodeName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.WorkDescription)</td>
+                        <td>@Html.DisplayFor(modelItem => item.HrsWorked)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*
+
+<div class="row">
+
+    <h2>Savings Report</h2>
+    <div class="span" style="border: 1px solid black">
+        <form id="reportForm" class="form-inline">
+            <div class="row">
+                <div class="col-md-4">
+                    <br />
+
+                </div>
+
+                <div class="col-md-4">
+                    <label for="fromDate">From Date</label><br />
+                    <div class="form-group">
+                        <input type="datetime" class="form-control" id="fromDate">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="toDate">To Date</label><br />
+                    <div class="form-group">
+                        <input type="datetime" class="form-control" id="toDate">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4">
+                    <button id="btnSearch" onclick="report()" class="btn btn-default col-md-4">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<div class="row">
+    <h2>Search Results</h2>
+    <div class="searchResults">
+
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Order Date
+                    </th>
+                    <th>
+                        Purchase Order No
+                    </th>
+                    <th>
+                        User
+                    </th>
+                    <th>
+                        List Order Total
+                    </th>
+                    <th>
+                        Discount Order Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="searchResults">
+            </tbody>
+        </table>
+
+    </div>
+</div>
+*@
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#tblData").DataTable({
+                'iDisplayLength': 100
+            });
+        });
+
+    </script>
+
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <script type="text/javascript">
+        $('#btn').click(function () {
+            $('.table').table2excel({
+                name: "download",
+                filename: "download",
+                fileext: ".xlsx"
+            });
+        });
+    </script>
+}

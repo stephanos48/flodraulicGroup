@@ -1,0 +1,144 @@
+﻿@model EngOverviewVM
+
+<div class="row">
+    <div class="col-12 col-md-2">
+        <a asp-area="Admin" asp-controller="Engineering" asp-action="TimeTrackerReports" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+            <small>Back</small>
+        </a>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="row">
+        <h2>Engineering Project Status Overview</h2>
+    </div>
+    <br />
+    <table class="table table-bordered" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    Project Status
+                </th>
+                <th>
+                    Status Qty
+                </th>
+                <th>
+                    Past Due Qty
+                </th>
+                <th>
+                    Notes
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>A. Project Queue</td>
+                <td>@Model.openA</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>B. Quote Feasibility Review</td>
+                <td>@Model.openB</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>C. Preparing Quote</td>
+                <td>@Model.openC</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>D. Review Quote w/ Paul</td>
+                <td>@Model.openD</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>E. Sent Quote to Customer / Awaiting Decision</td>
+                <td>@Model.openE</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>F. Order Received</td>
+                <td>@Model.openF</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>G. Management Approval for Quotes above $50K</td>
+                <td>@Model.openG</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>H. Engineering Design</td>
+                <td>@Model.openH</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>I. Design Sent to Customer for Approval</td>
+                <td>@Model.openI</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>J. Approved / Ready for Shop Release</td>
+                <td>@Model.openJ</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>K. Shop Released / Waiting for Parts</td>
+                <td>@Model.openK</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>L. All Parts in Stock / Waiting to go to Assy</td>
+                <td>@Model.openL</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>M. Assembly & Test</td>
+                <td>@Model.openM</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>N. Shipping</td>
+                <td>@Model.openN</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>O. Documentation / Manual Done</td>
+                <td>@Model.openO</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>P. Completed Projects / Product Delivered</td>
+                <td>@Model.openP</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Q. No Quote / Quote Archived</td>
+                <td>@Model.openQ</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>R. On Hold</td>
+                <td>@Model.openR</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

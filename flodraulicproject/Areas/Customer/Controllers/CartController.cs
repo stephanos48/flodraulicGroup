@@ -1,10 +1,12 @@
-﻿using flodraulicproject.DataAccess.Repository.IRepository;
+﻿using flodraulicproject.DataAccess.Data;
+using flodraulicproject.DataAccess.Repository.IRepository;
 using flodraulicproject.Models;
 using flodraulicproject.Models.ViewModels;
 using flodraulicproject.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Stripe;
 using Stripe.BillingPortal;
 using Stripe.Checkout;
@@ -22,13 +24,16 @@ namespace flodraulicproject.Areas.Customer.Controllers
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEmailSender _emailSender;
-        [BindProperty]
+		private readonly ApplicationDbContext _db;
+
+		[BindProperty]
         public ShoppingCartVM ShoppingCartVM { get; set; }
-        public CartController(IUnitOfWork unitOfWork, IEmailSender emailSender)
+        public CartController(IUnitOfWork unitOfWork, IEmailSender emailSender, ApplicationDbContext db)
         {
             _unitOfWork = unitOfWork;
             _emailSender = emailSender;
-        }
+			_db = db;
+		}
 
         public IActionResult Index()
         {
@@ -44,8 +49,8 @@ namespace flodraulicproject.Areas.Customer.Controllers
 
             foreach(var cart in ShoppingCartVM.ShoppingCartList)
             {
-                cart.Price = GetPriceBasedOnQuantity(cart);
-                ShoppingCartVM.OrderHeader.OrderTotal += (cart.Price * cart.Count);
+                cart.DiscountPrice = GetDiscountPrice(cart);
+                ShoppingCartVM.OrderHeader.OrderTotal += (cart.DiscountPrice * cart.Count);
             }
 
             return View(ShoppingCartVM);
@@ -56,10 +61,18 @@ namespace flodraulicproject.Areas.Customer.Controllers
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
+            IEnumerable<SelectListItem> StatusList = _unitOfWork.Status
+            .GetAll().Select(u => new SelectListItem
+            {
+                Text = u.StatusName,
+                Value = u.StatusId.ToString()
+            });
+
+            ViewBag.StatusList = StatusList;
+
             ShoppingCartVM = new()
             {
-                ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId,
-                includeProperties: "Product"),
+                ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product"),
                 OrderHeader = new()
             };
 
@@ -72,10 +85,19 @@ namespace flodraulicproject.Areas.Customer.Controllers
             ShoppingCartVM.OrderHeader.State = ShoppingCartVM.OrderHeader.ApplicationUser.State;
             ShoppingCartVM.OrderHeader.PostalCode = ShoppingCartVM.OrderHeader.ApplicationUser.PostalCode;
 
-            foreach (var cart in ShoppingCartVM.ShoppingCartList)
+			foreach (var cart in ShoppingCartVM.ShoppingCartList)
             {
-                cart.Price = GetPriceBasedOnQuantity(cart);
-                ShoppingCartVM.OrderHeader.OrderTotal += (cart.Price * cart.Count);
+
+				var startQoh = _db.Inventories.Where(k => k.ProductId == cart.Product.Id).Sum(y => y.StartQoh);
+				//var totalShipped = querydistinct.AsEnumerable().Sum(x => x.ShippedQty);
+				var totalShipped = _db.ShippedQtys.Where(j => j.ProductId == cart.Product.Id).Sum(b => b.QtyShipped);
+				var totalQoh = startQoh - totalShipped;
+
+				cart.Price = GetListPrice(cart);
+                cart.DiscountPrice = GetDiscountPrice(cart);
+                cart.LeadTime = GetLeadTime(cart);
+                cart.Product.Qoh = totalQoh;
+                ShoppingCartVM.OrderHeader.OrderTotal += (cart.DiscountPrice * cart.Count);
             }
 
             return View(ShoppingCartVM);
@@ -88,14 +110,16 @@ namespace flodraulicproject.Areas.Customer.Controllers
 		{
 			var claimsIdentity = (ClaimsIdentity)User.Identity;
 			var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var statusId = SD.StatusIdNew;
 
             ShoppingCartVM.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId,
                 includeProperties: "Product");
 
             ShoppingCartVM.OrderHeader.OrderDate = System.DateTime.Now;
             ShoppingCartVM.OrderHeader.ApplicationUserId = userId;
+            ShoppingCartVM.OrderHeader.StatusId = statusId;
 
-			ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
+            ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
 
 			//ShoppingCartVM.OrderHeader.Name = ShoppingCartVM.OrderHeader.ApplicationUser.Name;
 			//ShoppingCartVM.OrderHeader.PhoneNumber = ShoppingCartVM.OrderHeader.ApplicationUser.PhoneNumber;
@@ -110,26 +134,31 @@ namespace flodraulicproject.Areas.Customer.Controllers
 				ShoppingCartVM.OrderHeader.OrderTotal += (cart.Price * cart.Count);
 			}
 
-            if (applicationUser.CompanyId.GetValueOrDefault() == 0)
+			/*if (applicationUser.CompanyId.GetValueOrDefault() == 0)
             {
 				//it is a regular customer 
 				ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusPending;
-				ShoppingCartVM.OrderHeader.OrderStatus = SD.StatusPending;
+				//ShoppingCartVM.OrderHeader.Status.StatusName = SD.StatusPending;
 			}
             else
             {
                 //it is a company user
                 ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusDelayedPayment;
-                ShoppingCartVM.OrderHeader.OrderStatus = SD.StatusApproved;
-            }
+                //ShoppingCartVM.OrderHeader.Status.StatusId = statusId;
+            }*/
 
-            _unitOfWork.OrderHeader.Add(ShoppingCartVM.OrderHeader);
+			ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusDelayedPayment;
+            
+
+			_unitOfWork.OrderHeader.Add(ShoppingCartVM.OrderHeader);
             _unitOfWork.Save();
+
             foreach(var cart in ShoppingCartVM.ShoppingCartList)
             {
                 OrderDetail orderDetail = new()
                 {
                     ProductId = cart.ProductId,
+                    FloLocationId = cart.FloLocationId,
                     OrderHeaderId = ShoppingCartVM.OrderHeader.Id,
                     Price = cart.Price,
                     Count = cart.Count
@@ -138,7 +167,21 @@ namespace flodraulicproject.Areas.Customer.Controllers
                 _unitOfWork.Save();
             }
 
-			if (applicationUser.CompanyId.GetValueOrDefault() == 0)
+            foreach(var cart in ShoppingCartVM.ShoppingCartList)
+            {
+                ShippedQty shippedQty = new()
+                {
+                    ProductId = cart.ProductId,
+                    OrderNoId = ShoppingCartVM.OrderHeader.Id,
+                    QtyShipped = cart.Count,
+                    FloLocationId = cart.FloLocationId
+                };
+                _unitOfWork.ShippedQty.Add(shippedQty);
+                _unitOfWork.Save();
+            }
+
+            //Stripe Payment Info
+			/*if (applicationUser.CompanyId.GetValueOrDefault() == 0)
 			{
 				//it is a regular customer account and we need to capture payment
 				//stripe logic
@@ -176,7 +219,7 @@ namespace flodraulicproject.Areas.Customer.Controllers
                 _unitOfWork.Save();
                 Response.Headers.Add("Location", session.Url);
                 return new StatusCodeResult(303);
-			}
+			}*/
 
 			return RedirectToAction(nameof(OrderConfirmation), new { id=ShoppingCartVM.OrderHeader.Id });
 		}
@@ -200,7 +243,12 @@ namespace flodraulicproject.Areas.Customer.Controllers
             }
 
             _emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "New Order - Flodraulic",
-                $"<p>New Order Created - {orderHeader.Id}</p>");
+                $"<p>New Order Created - {orderHeader.Id}</p>" +
+                $"<p>Purchase Order - {orderHeader.PurchaseOrderNo}</p>" +
+                $"<p>Order Date - {orderHeader.OrderDate}</p>" +
+                $"<p>Order Total - ${orderHeader.OrderTotal}</p>" 
+
+                );
 
             List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
                 .GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();
@@ -269,5 +317,26 @@ namespace flodraulicproject.Areas.Customer.Controllers
                 }
             }
         }
-    }
+
+		private double GetListPrice(ShoppingCart shoppingCart)
+		{
+
+			return shoppingCart.Product.ListPrice;
+
+		}
+
+		private double GetDiscountPrice(ShoppingCart shoppingCart)
+		{
+
+			return shoppingCart.Product.DiscountPrice;
+			
+		}
+
+		private int? GetLeadTime(ShoppingCart shoppingCart)
+		{
+
+			return shoppingCart.Product.LeadTime;
+
+		}
+	}
 }
